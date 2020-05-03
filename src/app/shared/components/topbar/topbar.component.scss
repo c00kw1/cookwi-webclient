@@ -1,0 +1,20 @@
+.topbar {
+    position: relative;
+
+    .bar-spacer {
+        flex: 1 1 auto;
+    }
+
+    .bar-icon {
+        padding: 0 14px;
+    }
+
+    .bar-logo {
+        padding: 5px;
+        img {
+            display: block;
+            position: relative;
+            height: 48px;
+        }
+    }
+}
