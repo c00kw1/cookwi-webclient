@@ -12,6 +12,14 @@
         object-fit: cover;
         height: 240px;
     }
+    mat-card-title {
+        margin-left: -16px;
+    }
+    .card-action-button {
+        .card-action-button-icon {
+            font-size: 20px;
+        }
+    }
 }
 
 .fab {

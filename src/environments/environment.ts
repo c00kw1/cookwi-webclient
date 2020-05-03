@@ -7,7 +7,8 @@ export const environment = {
     backend: {
         scheme: "https",
         hostname: "localhost",
-        port: 5001
+        port: 5001,
+        prefix: "api"
     }
 };
 

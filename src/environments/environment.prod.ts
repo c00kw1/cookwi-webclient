@@ -1,4 +1,9 @@
 export const environment = {
   production: true,
-  apiUrl: "https://localhost:5001"
+  backend: {
+      scheme: "",
+      hostname: "",
+      port: 42,
+      prefix: "api"
+  }
 };
