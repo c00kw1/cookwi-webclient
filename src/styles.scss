@@ -1,0 +1,26 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "variables.scss";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.page-title {
+    background-color: $primary-light;
+    height: 80px;
+
+    h1 {
+        margin: 0;
+        padding-left: 40px;
+        padding-top: 25px;
+        font-size: 26px;
+        font-weight: 100;
+        color: white;
+    }
+}
+
+.page-container {
+    width: 70%;
+    margin: auto;
+    padding-bottom: 30px;
+}

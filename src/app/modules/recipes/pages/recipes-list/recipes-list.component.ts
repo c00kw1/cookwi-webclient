@@ -3,11 +3,11 @@ import { RecipesService } from 'src/app/core/services/recipes.service';
 import { Recipe } from 'src/app/shared/models/recipe.model';
 
 @Component({
-    selector: 'app-recipes',
-    templateUrl: './recipes.component.html',
-    styleUrls: ['./recipes.component.scss']
+    selector: 'app-recipes-list',
+    templateUrl: './recipes-list.component.html',
+    styleUrls: ['./recipes-list.component.scss']
 })
-export class RecipesComponent implements OnInit {
+export class RecipesListComponent implements OnInit {
 
     public recipes: Recipe[];
 

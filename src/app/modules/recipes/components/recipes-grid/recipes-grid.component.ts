@@ -9,11 +9,11 @@ import { map, startWith } from 'rxjs/operators';
 import { RecipesService } from 'src/app/core/services/recipes.service';
 
 @Component({
-    selector: 'app-list-receipes',
-    templateUrl: './receipes-list.component.html',
-    styleUrls: ['./receipes-list.component.scss']
+    selector: 'app-recipes-grid',
+    templateUrl: './recipes-grid.component.html',
+    styleUrls: ['./recipes-grid.component.scss']
 })
-export class ReceipesListComponent implements OnInit, OnChanges {
+export class RecipesGridComponent implements OnInit, OnChanges {
 
     @Input()
     public recipes: Recipe[];
@@ -32,7 +32,7 @@ export class ReceipesListComponent implements OnInit, OnChanges {
     @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
     constructor(private recipeService: RecipesService) {
-        
+
     }
 
     ngOnChanges(changes: SimpleChanges): void {
@@ -47,7 +47,6 @@ export class ReceipesListComponent implements OnInit, OnChanges {
             this.filteredTags = this.tagCtrl.valueChanges.pipe(
                 startWith(null),
                 map((tagName: string | null) => {
-                    console.log('map=' + tagName);
                     return tagName ? this._filter(tagName) : this.allTags.slice();
                 })
             );
@@ -78,15 +77,14 @@ export class ReceipesListComponent implements OnInit, OnChanges {
     }
 
     selected(event: MatAutocompleteSelectedEvent): void {
-        console.log('selected=' + event.option.viewValue);
         this.selectedTags.push(event.option.viewValue);
         this.fruitInput.nativeElement.value = '';
         this.tagCtrl.setValue(null);
-      }
+    }
 
     private _filter(value: string): string[] {
         const filterValue = value.toLowerCase();
         return this.allTags.filter(tag => tag.includes(filterValue));
-      }
+    }
 
 }

@@ -1,0 +1,26 @@
+.create-container {
+    width: 40% !important;
+    @media screen and (max-width: 1919px) {
+        width: 50% !important;
+    }
+    @media screen and (max-width: 1279px) {
+        width: 60% !important;
+    }
+    @media screen and (max-width: 959px) {
+        width: 70% !important;
+    }
+    @media screen and (max-width: 599px) {
+        width: 85% !important;
+    }
+}
+
+.recipe-img {
+    background-color: #f3f4f6;
+    max-height: 400px;
+    object-fit: cover;
+}
+
+.input {
+    width: 100%;
+    font-size: 15px;
+}
