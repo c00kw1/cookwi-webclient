@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RecipesRoutingModule } from './recipes-routing.module';
-import { RecipesComponent } from './pages/recipes/recipes.component';
-import { ReceipesListComponent } from './components/receipes-list/receipes-list.component';
+import { RecipesListComponent } from './pages/recipes-list/recipes-list.component';
+import { RecipesGridComponent } from './components/recipes-grid/recipes-grid.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,9 +17,10 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { CoreModule } from 'src/app/core/core.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { RecipesCreateComponent } from './pages/recipes-create/recipes-create.component';
 
 @NgModule({
-    declarations: [RecipesComponent, ReceipesListComponent],
+    declarations: [RecipesListComponent, RecipesGridComponent, RecipesCreateComponent],
     imports: [
         CommonModule,
         RecipesRoutingModule,

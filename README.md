@@ -1,3 +1,5 @@
+![Build](https://github.com/gjdass/cookwi-webclient/workflows/Build/badge.svg)
+
 # Cookwi webclient
 
 Front-end for Cookwi project. Made with [angular](https://angular.io).
