@@ -6,7 +6,7 @@ import { FormControl } from '@angular/forms';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { RecipesService } from 'src/app/core/services/recipes.service';
+import { TagsService } from 'src/app/core/services/tags.service';
 
 @Component({
     selector: 'app-recipes-grid',
@@ -31,7 +31,7 @@ export class RecipesGridComponent implements OnInit, OnChanges {
     @ViewChild('tagInput') fruitInput: ElementRef<HTMLInputElement>;
     @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
-    constructor(private recipeService: RecipesService) {
+    constructor(private tagsService: TagsService) {
 
     }
 
@@ -42,7 +42,7 @@ export class RecipesGridComponent implements OnInit, OnChanges {
     }
 
     ngOnInit(): void {
-        this.recipeService.getAllTags().subscribe(res => {
+        this.tagsService.getAllTags().subscribe(res => {
             this.allTags = res.map(t => t.name);
             this.filteredTags = this.tagCtrl.valueChanges.pipe(
                 startWith(null),
