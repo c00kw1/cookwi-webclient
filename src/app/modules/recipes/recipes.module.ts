@@ -14,6 +14,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { CoreModule } from 'src/app/core/core.module';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -28,7 +29,7 @@ import { RecipesCreateComponent } from './pages/recipes-create/recipes-create.co
         MatButtonModule, MatIconModule, MatListModule,
         MatCardModule, MatInputModule, MatChipsModule,
         MatGridListModule, FormsModule, MatAutocompleteModule,
-        ReactiveFormsModule,
+        ReactiveFormsModule, MatSnackBarModule,
         CoreModule,
         SharedModule
     ]

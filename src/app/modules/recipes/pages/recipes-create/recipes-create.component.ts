@@ -1,5 +1,4 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { RecipesService } from 'src/app/core/services/recipes.service';
 import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -8,6 +7,9 @@ import { startWith, map } from 'rxjs/operators';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Recipe } from 'src/app/shared/models/recipe.model';
 import { Tag } from 'src/app/shared/models/tag.model';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { TagsService } from 'src/app/core/services/tags.service';
+import { RecipesService } from 'src/app/core/services/recipes.service';
 
 @Component({
     selector: 'app-recipes-create',
@@ -21,56 +23,64 @@ export class RecipesCreateComponent implements OnInit {
 
     readonly separatorKeysCodes: number[] = [ENTER, COMMA];
     tagCtrl = new FormControl();
-    filteredTags: Observable<string[]>;
+    filteredTags: Observable<Tag[]>;
 
-    public selectedTags: string[] = [];
-    public allTags: string[] = [];
+    public selectedTags: Tag[] = [];
+    public allTags: Tag[] = [];
 
     public recipe: Recipe;
-    public createForm: FormGroup;
+    public form: FormGroup;
 
-    @ViewChild('tagInput') fruitInput: ElementRef<HTMLInputElement>;
+    @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
     @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
     constructor(
-        private recipeService: RecipesService,
-        private formBuilder: FormBuilder
+        private recipesService: RecipesService,
+        private tagsService: TagsService,
+        private formBuilder: FormBuilder,
+        private snackBar: MatSnackBar
     ) {
         this.recipe = new Recipe();
+        this.recipe.tags = this.selectedTags;
     }
 
     ngOnInit(): void {
-        this.recipeService.getAllTags().subscribe(res => {
-            this.allTags = res.map(t => t.name);
+        this.tagsService.getAllTags().subscribe(res => {
+            this.allTags = res;
             this.filteredTags = this.tagCtrl.valueChanges.pipe(
                 startWith(null),
-                map((tagName: string | null) => {
-                    return tagName ? this._filter(tagName) : this.allTags.slice();
+                map((tag: string | null) => {
+                    return tag ? this._filter(tag) : this.allTags.slice();
                 })
             );
         });
-        // form construction
-        this.createForm = this.formBuilder.group(this.recipe);
+
+        // form group construction
+        this.form = this.formBuilder.group(this.recipe);
+        // we have to manually set the FormControl for tags because :
+        // tags are not coming from an input but from a string[] filled by an input
+        // if one day we need to validate tags, this class need transformation again https://www.dev6.com/angular/angular-material-chips-with-reactive-forms-and-custom-validation/
+        this.form.controls['tags'].setValue(this.selectedTags);
     }
 
     onSubmit(newRecipe: Recipe) {
-        // we get the tags from input and we push them into the new recipe
-        newRecipe.tags = [];
-        this.selectedTags.forEach(name => newRecipe.tags.push(new Tag(name)));
         // we send the recipe
-        this.recipeService.createOne(newRecipe).subscribe(res => {
-            this.createForm.reset();
-            console.log('Created : ', res);
+        this.recipesService.createOne(newRecipe).subscribe(res => {
+            this.form.reset();
+            this.selectedTags = [];
+            this.snackBar.open("Recipe created :-)", "Fermer", { duration: 3000 });
         });
     }
+
+    //#region Tags chips
 
     add(event: MatChipInputEvent): void {
         const input = event.input;
         const value = event.value;
 
-        // Add our fruit
+        // Add our tag
         if ((value || '').trim()) {
-            this.selectedTags.push(value.trim().toLowerCase());
+            this.selectedTags.push(new Tag(value.trim().toLowerCase()));
         }
 
         // Reset the input value
@@ -80,22 +90,24 @@ export class RecipesCreateComponent implements OnInit {
     }
 
     selected(event: MatAutocompleteSelectedEvent): void {
-        this.selectedTags.push(event.option.viewValue);
-        this.fruitInput.nativeElement.value = '';
+        this.selectedTags.push(new Tag(event.option.viewValue));
+        this.tagInput.nativeElement.value = '';
         this.tagCtrl.setValue(null);
     }
 
-    remove(tag: string): void {
-        const index = this.selectedTags.indexOf(tag);
+    remove(tag: Tag): void {
+        const index = this.selectedTags.findIndex(t => t.name == tag.name);
 
         if (index >= 0) {
             this.selectedTags.splice(index, 1);
         }
     }
 
-    private _filter(value: string): string[] {
+    private _filter(value: string): Tag[] {
         const filterValue = value.toLowerCase();
-        return this.allTags.filter(tag => tag.includes(filterValue));
+        return this.allTags.filter(tag => tag.name.includes(filterValue));
     }
+
+    //#endregion
 
 }
