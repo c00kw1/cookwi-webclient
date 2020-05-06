@@ -8,4 +8,11 @@ export class Recipe {
     public description: string;
     public imagePath: string;
     public tags: Tag[];
+
+    constructor() {
+        this.title = "";
+        this.description = "";
+        this.imagePath = "";
+        this.tags = [];
+    }
 }
