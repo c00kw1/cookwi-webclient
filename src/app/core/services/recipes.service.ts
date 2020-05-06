@@ -3,14 +3,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Recipe } from 'src/app/shared/models/recipe.model';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Tag } from 'src/app/shared/models/tag.model';
 
-const httpOptions = {
-    headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-    }),
-    responseType: 'json' as const
-};
+const headers = new HttpHeaders({
+    'Content-Type': 'application/json'
+});
 
 @Injectable({
     providedIn: 'root'
@@ -25,18 +21,10 @@ export class RecipesService {
     }
 
     getAll(): Observable<Recipe[]> {
-        return this.http.get<Recipe[]>(this.api, httpOptions);
+        return this.http.get<Recipe[]>(this.api, { headers: headers });
     }
 
     createOne(recipe: Recipe): Observable<Recipe> {
-        return this.http.post<Recipe>(this.api, JSON.stringify(recipe), httpOptions);
+        return this.http.post<Recipe>(this.api, JSON.stringify(recipe), { headers: headers });
     }
-
-    //#region Tags
-
-    getAllTags(): Observable<Tag[]> {
-        return this.http.get<Tag[]>(this.api + '/tags');
-    }
-
-    //#endregion
 }
