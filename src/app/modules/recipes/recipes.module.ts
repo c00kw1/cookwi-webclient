@@ -19,6 +19,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CoreModule } from 'src/app/core/core.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RecipesCreateComponent } from './pages/recipes-create/recipes-create.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
     declarations: [RecipesListComponent, RecipesGridComponent, RecipesCreateComponent],
@@ -29,7 +30,7 @@ import { RecipesCreateComponent } from './pages/recipes-create/recipes-create.co
         MatButtonModule, MatIconModule, MatListModule,
         MatCardModule, MatInputModule, MatChipsModule,
         MatGridListModule, FormsModule, MatAutocompleteModule,
-        ReactiveFormsModule, MatSnackBarModule,
+        ReactiveFormsModule, MatSnackBarModule, DragDropModule,
         CoreModule,
         SharedModule
     ]

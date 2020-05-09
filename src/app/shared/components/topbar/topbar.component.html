@@ -2,13 +2,23 @@
     <mat-toolbar color="primary" class="mat-elevation-z6">
         <mat-toolbar-row>
             <span class="bar-logo"><img src="../../../../assets/logo.png"></span>
-            <span>Cookwi</span>
+            <span [routerLink]="['/home']" style="cursor: pointer;">Cookwi</span>
             <div class="bar-menu">
-                <a mat-button [routerLink]="['/recipes/list']">Mes recettes</a>
+                <a mat-button [routerLink]="['/recipes/list']" *ngIf="auth.loggedIn">Mes recettes</a>
             </div>
             <span class="bar-spacer"></span>
-            <mat-icon class="bar-icon" aria-hidden="false" aria-label="My account">account_circle</mat-icon>
-            <mat-icon class="bar-icon" aria-hidden="false" aria-label="Need help">help_outline</mat-icon>
+            <a mat-button *ngIf="!auth.loggedIn" (click)="auth.login()">
+                <mat-icon>lock</mat-icon>
+                Connexion
+            </a>
+            <button mat-button *ngIf="auth.loggedIn" [matMenuTriggerFor]="menu">
+                <mat-icon>face</mat-icon>
+                {{profile.nickname}}
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item [routerLink]="['/profile']">Profile</button>
+                <button mat-menu-item (click)="auth.logout()">Deconnexion</button>
+            </mat-menu>
         </mat-toolbar-row>
     </mat-toolbar>
 </div>
