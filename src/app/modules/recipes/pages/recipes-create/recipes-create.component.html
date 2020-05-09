@@ -17,7 +17,8 @@
                 <mat-form-field class="input" appearance="outline">
                     <mat-label>Description</mat-label>
                     <mat-icon matSuffix>subtitles</mat-icon>
-                    <textarea matInput matTextareaAutosize matAutosizeMinRows=2 formControlName="description"></textarea>
+                    <textarea matInput matTextareaAutosize matAutosizeMinRows=2
+                        formControlName="description"></textarea>
                 </mat-form-field>
                 <br>
 
@@ -26,8 +27,6 @@
                 <mat-form-field class="input" appearance="outline">
                     <mat-label>Tags</mat-label>
                     <mat-icon matSuffix>local_offer</mat-icon>
-
-
                     <mat-chip-list #chipList aria-label="Tag selection">
                         <mat-chip *ngFor="let tag of selectedTags" [selectable]="true" [removable]="true"
                             (removed)="remove(tag)">
@@ -38,15 +37,11 @@
                             [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                             (matChipInputTokenEnd)="add($event)">
                     </mat-chip-list>
-
-
                     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
                         <mat-option *ngFor="let tag of filteredTags | async" [value]="tag.name">
                             {{tag.name}}
                         </mat-option>
                     </mat-autocomplete>
-
-                    
                 </mat-form-field>
 
 
@@ -56,6 +51,28 @@
                     <mat-icon matSuffix>add_photo_alternate</mat-icon>
                     <input matInput placeholder="http://" formControlName="imagePath" [(ngModel)]="imagePath">
                 </mat-form-field>
+
+                <h3>Steps</h3>
+                <p>Move the steps to change the order <mat-icon style="font-size: inherit;">menu_open</mat-icon></p>
+                <div cdkDropList class="steps-list" (cdkDropListDropped)="drop($event)">
+                    <div class="move" *ngFor="let step of steps; let i = index" cdkDrag><!-- we put a div above all otherwise display: flex is gone after a drag-drop -->
+                        <div fxLayout="row" fxLayoutGap="10px">
+                            <div fxFlex="36px" fxFlexAlign="center" style="border:0px dashed red">
+                                <mat-icon cdkDragHandle color="primary" style="font-size: 2em;">menu_open</mat-icon>
+                            </div>
+                            <div fxFlex="682px">
+                                <mat-form-field  class="input" appearance="outline">
+                                    <mat-label>Step {{i + 1}}</mat-label>
+                                    <textarea matInput matTextareaAutosize matAutosizeMinRows=2 [ngModelOptions]="{standalone: true}" [(ngModel)]="step.content"></textarea>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button style="margin-left:46px;margin-top:10px;" mat-raised-button color="primary" (click)="addStep(steps.length)" type="button">
+                    <mat-icon>add_box</mat-icon>
+                </button>
+                <br><br>
                 <mat-divider></mat-divider>
                 <div style="margin-top: 20px; text-align: right;">
                     <button mat-stroked-button color="warn">

@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
-    selector: 'app-topbar',
-    templateUrl: './topbar.component.html',
-    styleUrls: ['./topbar.component.scss']
+    selector: 'app-profile',
+    templateUrl: './profile.component.html',
+    styleUrls: ['./profile.component.css']
 })
-export class TopbarComponent implements OnInit {
+export class ProfileComponent implements OnInit {
 
     public profile: any;
 

@@ -1,3 +1,4 @@
+import {MatMenuModule} from '@angular/material/menu';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -14,7 +15,8 @@ import { TopbarComponent } from './components/topbar/topbar.component';
   declarations: [TopbarComponent, RecipesSearchPipe, TagsFilterPipe],
   imports: [
     CommonModule, RouterModule,
-    MatToolbarModule, MatIconModule, MatButtonModule
+    MatToolbarModule, MatIconModule, MatButtonModule,
+    MatMenuModule
   ],
   exports: [TopbarComponent, RecipesSearchPipe, TagsFilterPipe]
 })

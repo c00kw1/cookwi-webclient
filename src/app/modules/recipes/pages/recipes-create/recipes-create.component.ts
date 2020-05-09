@@ -1,3 +1,4 @@
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
@@ -10,6 +11,7 @@ import { Tag } from 'src/app/shared/models/tag.model';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { TagsService } from 'src/app/core/services/tags.service';
 import { RecipesService } from 'src/app/core/services/recipes.service';
+import { Step } from 'src/app/shared/models/step.model';
 
 @Component({
     selector: 'app-recipes-create',
@@ -65,9 +67,11 @@ export class RecipesCreateComponent implements OnInit {
 
     onSubmit(newRecipe: Recipe) {
         // we send the recipe
+        newRecipe.steps = this.steps;
         this.recipesService.createOne(newRecipe).subscribe(res => {
             this.form.reset();
             this.selectedTags = [];
+            this.steps = [];
             this.snackBar.open("Recipe created :-)", "Fermer", { duration: 3000 });
         });
     }
@@ -110,4 +114,21 @@ export class RecipesCreateComponent implements OnInit {
 
     //#endregion
 
+    //#region DragAndDrop
+
+    steps: Step[] = [];
+
+    drop(event: CdkDragDrop<string[]>) {
+        moveItemInArray(this.steps, event.previousIndex, event.currentIndex);
+        // we have to rebuild all step numbers
+        this.steps.forEach((step, index) => {
+            step.stepNumber = index + 1;
+        });
+    }
+
+    addStep(nextIndex: number) {
+        this.steps.push(new Step(nextIndex + 1, ""));
+    }
+
+    //#endregion
 }
