@@ -12,6 +12,7 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { TagsService } from 'src/app/core/services/tags.service';
 import { RecipesService } from 'src/app/core/services/recipes.service';
 import { Step } from 'src/app/shared/models/step.model';
+import { Ingredient } from 'src/app/shared/models/ingredient.model';
 
 @Component({
     selector: 'app-recipes-create',
@@ -22,13 +23,6 @@ export class RecipesCreateComponent implements OnInit {
 
     public imagePath: string = "";
     public defaultImage: string = "../../../../../assets/no-image-found.png";
-
-    readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-    tagCtrl = new FormControl();
-    filteredTags: Observable<Tag[]>;
-
-    public selectedTags: Tag[] = [];
-    public allTags: Tag[] = [];
 
     public recipe: Recipe;
     public form: FormGroup;
@@ -44,6 +38,8 @@ export class RecipesCreateComponent implements OnInit {
     ) {
         this.recipe = new Recipe();
         this.recipe.tags = this.selectedTags;
+        this.ingredients.push(new Ingredient());
+        this.steps.push(new Step(1, ""))
     }
 
     ngOnInit(): void {
@@ -57,6 +53,10 @@ export class RecipesCreateComponent implements OnInit {
             );
         });
 
+        this.recipesService.getAllQuantityUnits().subscribe(res => {
+            this.quantityUnits = res;
+        });
+
         // form group construction
         this.form = this.formBuilder.group(this.recipe);
         // we have to manually set the FormControl for tags because :
@@ -67,6 +67,7 @@ export class RecipesCreateComponent implements OnInit {
 
     onSubmit(newRecipe: Recipe) {
         // we send the recipe
+        newRecipe.ingredients = this.ingredients;
         newRecipe.steps = this.steps;
         this.recipesService.createOne(newRecipe).subscribe(res => {
             this.form.reset();
@@ -77,6 +78,13 @@ export class RecipesCreateComponent implements OnInit {
     }
 
     //#region Tags chips
+
+    readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+    tagCtrl = new FormControl();
+    filteredTags: Observable<Tag[]>;
+
+    public selectedTags: Tag[] = [];
+    public allTags: Tag[] = [];
 
     add(event: MatChipInputEvent): void {
         const input = event.input;
@@ -114,11 +122,26 @@ export class RecipesCreateComponent implements OnInit {
 
     //#endregion
 
-    //#region DragAndDrop
+    //#region Ingredients
+
+    quantityUnits: string[] = [];
+    ingredients: Ingredient[] = [];
+
+    add_ingredient() {
+        this.ingredients.push(new Ingredient());
+    }
+
+    delete_ingredient(index: number) {
+        this.ingredients.splice(index, 1);
+    }
+
+    //#endregion
+
+    //#region Steps
 
     steps: Step[] = [];
 
-    drop(event: CdkDragDrop<string[]>) {
+    drop_step(event: CdkDragDrop<string[]>) {
         moveItemInArray(this.steps, event.previousIndex, event.currentIndex);
         // we have to rebuild all step numbers
         this.steps.forEach((step, index) => {
@@ -126,8 +149,12 @@ export class RecipesCreateComponent implements OnInit {
         });
     }
 
-    addStep(nextIndex: number) {
+    add_step(nextIndex: number) {
         this.steps.push(new Step(nextIndex + 1, ""));
+    }
+
+    delete_step(index: number) {
+        this.steps.splice(index, 1);
     }
 
     //#endregion

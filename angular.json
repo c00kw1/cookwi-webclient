@@ -5,7 +5,11 @@
   "projects": {
     "cookwi-webclient": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -21,7 +25,8 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/silent-refresh.html"
             ],
             "styles": [
               "src/variables.scss",
@@ -124,5 +129,10 @@
       }
     }
   },
-  "defaultProject": "cookwi-webclient"
+  "defaultProject": "cookwi-webclient",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }

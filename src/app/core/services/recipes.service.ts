@@ -27,4 +27,8 @@ export class RecipesService {
     createOne(recipe: Recipe): Observable<Recipe> {
         return this.http.post<Recipe>(this.api, JSON.stringify(recipe), { headers: headers });
     }
+
+    getAllQuantityUnits(): Observable<string[]> {
+        return this.http.get<string[]>(this.api + "/quantity-units", { headers: headers });
+    }
 }
