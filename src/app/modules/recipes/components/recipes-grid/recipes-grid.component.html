@@ -50,7 +50,7 @@
         <div fxFlex="0 1 calc(25%)" fxFlex.lt-xl="0 1 calc(33.33%)" fxFlex.lt-lg="0 1 calc(50%)" fxFlex.lt-md="100%"
             *ngFor="let recipe of showedRecipes | recipesSearch: searchText | tagsFilter: selectedTags">
             <mat-card class="recipe-card">
-                <img class="recipe-img" mat-card-image src="{{recipe.imagePath}}">
+                <img class="recipe-img" mat-card-image src="{{recipe.imagePath || noImagePath}}">
                 <mat-card-header>
                     <mat-card-title>{{recipe.title}}</mat-card-title>
                 </mat-card-header>

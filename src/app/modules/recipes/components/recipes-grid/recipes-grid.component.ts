@@ -19,6 +19,7 @@ export class RecipesGridComponent implements OnInit, OnChanges {
     public recipes: Recipe[];
     public showedRecipes: Recipe[];
 
+    public noImagePath: string = '../../../../../assets/no-image-found.png';
     public searchText: string;
     public selectedTags: string[] = [];
 

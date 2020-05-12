@@ -3,21 +3,21 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
-import { RecipesModule } from './modules/recipes/recipes.module';
 import { SharedModule } from './shared/shared.module';
-import { HomeModule } from './modules/home/home.module';
+import { CoreModule } from './core/core.module';
+import { NotFoundComponent } from './not-found.component';
+import { ShouldLoginComponent } from './should-login.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent, NotFoundComponent, ShouldLoginComponent
   ],
   imports: [
-    AppRoutingModule,
+    CoreModule.forRoot(),
     BrowserModule,
     BrowserAnimationsModule,
     SharedModule,
-    RecipesModule,
-    HomeModule
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

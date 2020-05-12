@@ -1,3 +1,4 @@
+import {MatSelectModule} from '@angular/material/select';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RecipesRoutingModule } from './recipes-routing.module';
@@ -16,7 +17,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
-import { CoreModule } from 'src/app/core/core.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RecipesCreateComponent } from './pages/recipes-create/recipes-create.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -31,7 +31,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
         MatCardModule, MatInputModule, MatChipsModule,
         MatGridListModule, FormsModule, MatAutocompleteModule,
         ReactiveFormsModule, MatSnackBarModule, DragDropModule,
-        CoreModule,
+        MatSelectModule,
         SharedModule
     ]
 })
