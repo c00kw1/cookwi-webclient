@@ -8,7 +8,7 @@ Front-end for Cookwi project. Made with [angular](https://angular.io).
 
 ### Angular related
 
-- Efficient project structure - [here](https://itnext.io/choosing-a-highly-scalable-folder-structure-in-angular-d987de65ec7)
+- [here](https://itnext.io/choosing-a-highly-scalable-folder-structure-in-angular-d987de65ec7) - Efficient project structure
 - Reactive forms with chips inputs (tags) - [here](https://www.dev6.com/angular/angular-material-chips-with-reactive-forms-and-custom-validation/)
 - Good explanation of Observable operators (pipe for example) - [here](https://www.concretepage.com/angular/angular-observable-pipe)
 
