@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/core/services/auth.service';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { UserInfo } from 'angular-oauth2-oidc';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-topbar',
@@ -8,15 +10,22 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class TopbarComponent implements OnInit {
 
-    public profile: any;
 
-    constructor(public auth: AuthService) { }
+    constructor(private authService: AuthService) { }
 
     ngOnInit(): void {
-        this.auth.userProfile$.subscribe(res => {
-            this.profile = res;
-            console.log(this.profile);
-        });
+        this.isLoggedIn = this.authService.isAuthenticated$;
+    }
+
+    public isLoggedIn: Observable<boolean>;
+    public login(): void { this.authService.login(); }
+    public logout(): void { this.authService.logout(); }
+    public refresh(): void { this.authService.refresh(); }
+    
+    get user_identity(): string {
+        return this.authService.identityClaims
+            ? `${this.authService.identityClaims['given_name']} ${this.authService.identityClaims['family_name']}`
+            : '-';
     }
 
 }

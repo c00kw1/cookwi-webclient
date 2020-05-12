@@ -4,8 +4,6 @@ import { HomeComponent } from './pages/home/home.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { ProfileComponent } from './pages/profile/profile.component';
 
-
-
 @NgModule({
   declarations: [HomeComponent, ProfileComponent],
   imports: [

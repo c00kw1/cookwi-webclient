@@ -1,21 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { InterceptorService } from './core/services/interceptor.service';
+import { NotFoundComponent } from './not-found.component';
+import { ShouldLoginComponent } from './should-login.component';
 
 const routes: Routes = [
-    { path: '', redirectTo: 'home', pathMatch: 'full' }
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { path: 'home', loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule) },
+    { path: 'recipes', loadChildren: () => import('./modules/recipes/recipes.module').then(m => m.RecipesModule) },
+
+    { path: 'should-login', component: ShouldLoginComponent },
+    { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule],
-    providers: [
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: InterceptorService,
-            multi: true
-        }
-    ]
+    exports: [RouterModule]
 })
 export class AppRoutingModule { }
