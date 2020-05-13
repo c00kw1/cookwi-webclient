@@ -1,11 +1,12 @@
 import { AuthConfig } from 'angular-oauth2-oidc';
+import { environment } from 'src/environments/environment';
 
 // doc for getting started https://www.npmjs.com/package/angular-oauth2-oidc
 
 export const authCodeFlowConfig: AuthConfig = {
     // basic configs
-    issuer: 'https://sso.hom-1.cookwi.com',
-    clientId: 'cf1f02a5-664f-4663-bb6f-407fb05f8bec',
+    issuer: environment.sso.issuer,
+    clientId: environment.sso.clientId,
     responseType: 'code',
     redirectUri: window.location.origin + '/index.html',
     silentRefreshRedirectUri: window.location.origin + '/silent-refresh.html',
