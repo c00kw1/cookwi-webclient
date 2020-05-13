@@ -4,11 +4,17 @@
 
 export const environment = {
     production: false,
-    backend: {
+    homologation: false,
+    dev: true,
+    api: {
         scheme: "https",
         hostname: "localhost",
         port: 5001,
         prefix: "api"
+    },
+    sso: {
+        issuer: "http://localhost:9011",
+        clientId: "026de2c8-b990-4717-91d8-92a704e25f58"
     }
 };
 

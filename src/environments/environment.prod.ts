@@ -1,9 +1,15 @@
 export const environment = {
-  production: true,
-  backend: {
-      scheme: "",
-      hostname: "",
-      port: 42,
-      prefix: "api"
-  }
+    production: true,
+    homologation: false,
+    dev: false,
+    api: {
+        scheme: "",
+        hostname: "",
+        port: 42,
+        prefix: "api"
+    },
+    sso: {
+        issuer: "https://sso.cookwi.com",
+        clientId: ""
+    }
 };
