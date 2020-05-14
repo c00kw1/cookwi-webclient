@@ -15,7 +15,7 @@ export const authCodeFlowConfig: AuthConfig = {
     //silentRefreshTimeout: 5000, // For faster testing
     timeoutFactor: 0.75, // For faster testing
     sessionChecksEnabled: false,
-    showDebugInformation: true, // Also requires enabling "Verbose" level in devtools
+    showDebugInformation: environment.dev, // Also requires enabling "Verbose" level in devtools
     clearHashAfterLogin: false, // https://github.com/manfredsteyer/angular-oauth2-oidc/issues/457#issuecomment-431807040,
     nonceStateSeparator: 'semicolon' // Real semicolon gets mangled by IdentityServer's URI encoding
 };

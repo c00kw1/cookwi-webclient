@@ -7,9 +7,9 @@ export const environment = {
     homologation: false,
     dev: true,
     api: {
-        scheme: "https",
+        scheme: "http",
         hostname: "localhost",
-        port: 5001,
+        port: 5000,
         prefix: "api"
     },
     sso: {
