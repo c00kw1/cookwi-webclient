@@ -1,0 +1,72 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Release
+
+on:
+  release:
+    types: [released]
+
+jobs:
+  build:
+    if: github.ref.contains("homologation")
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Cache node modules
+      uses: actions/cache@v1
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-  
+    - name: Node ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Build Release
+      run: |
+        npm ci
+        ng build --output-path=./release-package --configuration=homologation
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: release-package
+        path: ./release-package
+  package:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download ng build folder
+      uses: actions/download-artifact@v2
+      with:
+        name: release-package
+        path: .
+    - name: Get tag
+      id: tag
+      uses: dawidd6/action-get-tag@v1.0.0
+    - name: Set filename
+      id: filename
+      run: echo "::set-output name=action_fruit::rel-homologation-${{steps.tag.outputs.tag}}.zip"
+    - name: Create Zip
+      uses: TheDoctor0/zip-release@v0.3.0
+      with:
+        filename: ${{steps.filename.outputs.filename}}
+        path: ./release-package
+        directory: .
+    - name: Get the upload URL
+      uses: bruceadams/get-release@v1.2.0
+      id: get
+    - name: Upload a Release Asset
+      uses: actions/upload-release-asset@v1.0.2
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.get.outputs.upload_url }}
+        asset_path: ./${{steps.filename.outputs.filename}}
+        asset_name: ${{steps.filename.outputs.filename}}
+        # The content-type of the asset you want to upload. See the supported Media Types here: https://www.iana.org/assignments/media-types/media-types.xhtml for more information
+        asset_content_type: application/zip
