@@ -17,7 +17,7 @@ export class TagsService {
     private controller: string = "tags";
 
     constructor(private http: HttpClient) {
-        this.api = `${environment.backend.scheme}://${environment.backend.hostname}:${environment.backend.port}/${environment.backend.prefix}/${this.controller}`;
+        this.api = `${environment.api.scheme}://${environment.api.hostname}:${environment.api.port}/${environment.api.prefix}/${this.controller}`;
     }
 
   /**
