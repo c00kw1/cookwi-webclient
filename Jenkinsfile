@@ -1,9 +1,25 @@
 pipeline {
-    agent { docker { image 'node:6.3' } }
+    agent { docker { image 'node:latest' } }
     stages {
-        stage('build') {
-            steps {
-                sh 'npm --version'
+        stage ('checkout')
+        {
+            steps
+            {
+                checkout scm
+            }
+        }
+        stage ('install modules')
+        {
+            steps
+            {
+                sh 'npm install --verbose -d'
+            }
+        }
+        stage ('build')
+        {
+            steps
+            {
+                sh '$(npm bin)/ng build'
             }
         }
     }
