@@ -15,12 +15,12 @@ pipeline {
                 sh '$(npm bin)/ng build'
             }
         }
-        stage ('Test')
-        {
-            steps
-            {
-                sh '$(npm bin)/ng test --no-watch --no-progress --browsers=ChromeHeadlessCI'
-            }
-        }
+        // stage ('Test')
+        // {
+        //     steps
+        //     {
+        //         sh '$(npm bin)/ng test --no-watch --no-progress --browsers=ChromeHeadlessCI'
+        //     }
+        // }
     }
 }
