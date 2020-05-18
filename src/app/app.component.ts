@@ -7,7 +7,6 @@ import { AuthService } from './core/services/auth/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-    
     constructor(private authService: AuthService) {
         this.authService.runInitialLoginSequence();
     }

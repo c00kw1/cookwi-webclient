@@ -2,11 +2,13 @@ import { NgModule, ModuleWithProviders, Optional, SkipSelf } from '@angular/core
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '../shared/shared.module';
-import { OAuthModule, OAuthStorage, AuthConfig, OAuthModuleConfig } from 'angular-oauth2-oidc';
+import { OAuthModule, OAuthStorage, AuthConfig, OAuthModuleConfig, OAuthService } from 'angular-oauth2-oidc';
 import { AuthService } from './services/auth/auth.service';
 import { AuthGuard } from './services/auth/auth.guard';
 import { authCodeFlowConfig } from './services/auth/auth-config';
 import { authModuleConfig } from './services/auth/auth-module-config';
+import { RecipesService } from './services/recipes.service';
+import { TagsService } from './services/tags.service';
 
 export function storageFactory(): OAuthStorage {
     return localStorage;
@@ -21,6 +23,8 @@ export function storageFactory(): OAuthStorage {
         SharedModule
     ],
     providers: [
+        RecipesService,
+        TagsService,
         AuthService,
         AuthGuard,
     ],
