@@ -1,25 +1,25 @@
 pipeline {
     agent { docker { image 'node:latest' } }
     stages {
-        stage ('checkout')
+        stage ('Install dependencies')
         {
             steps
             {
-                checkout scm
+                sh 'npm install'
             }
         }
-        stage ('install modules')
-        {
-            steps
-            {
-                sh 'npm install --verbose -d'
-            }
-        }
-        stage ('build')
+        stage ('Build')
         {
             steps
             {
                 sh '$(npm bin)/ng build'
+            }
+        }
+        stage ('Test')
+        {
+            steps
+            {
+                sh '$(npm bin)/ng test --no-watch --no-progress --browsers=ChromeHeadlessCI'
             }
         }
     }
