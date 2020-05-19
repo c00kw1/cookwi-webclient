@@ -1,7 +1,7 @@
 <div class="topbar">
     <mat-toolbar color="primary" class="mat-elevation-z6">
         <mat-toolbar-row>
-            <span class="bar-logo"><img src="../../../../assets/logo.png"></span>
+            <span class="bar-logo"><img src="/assets/logo.png"></span>
             <span [routerLink]="['/home']" style="cursor: pointer;">Cookwi</span>
             <div class="bar-menu">
                 <a i18n mat-button [routerLink]="['/recipes/list']" *ngIf="isLoggedIn | async">Mes recettes</a>

@@ -22,7 +22,7 @@ import { Ingredient } from 'src/app/shared/models/ingredient.model';
 export class RecipesCreateComponent implements OnInit {
 
     public imagePath: string = "";
-    public defaultImage: string = "../../../../../assets/no-image-found.png";
+    public defaultImage: string = "/assets/no-image-found.png";
 
     public recipe: Recipe;
     public form: FormGroup;

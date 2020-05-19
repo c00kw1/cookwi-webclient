@@ -15,13 +15,20 @@ pipeline {
                 sh '$(npm bin)/ng build --configuration=${ENVIRONMENT} --output-path=${OUTPUT_PATH}'
             }
         }
+        stage ('Artifacts')
+        {
+            steps
+            {
+                zip zipFile: 'webclient-package.zip', archive: true, dir: OUTPUT_PATH
+                zip zipFile: 'docker-config.zip', archive: true, dir: "docker/${ENVIRONMENT}"
+            }
+        }
     }
     post
     {
-        success
+        always
         {
-            zip zipFile: 'webclient-package.zip', archive: true, dir: OUTPUT_PATH
-            sh 'rm -rf webclient-package.zip'
+            deleteDir()
         }
     }
 }
