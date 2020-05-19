@@ -12,15 +12,16 @@ pipeline {
         {
             steps
             {
-                sh '$(npm bin)/ng build'
+                sh '$(npm bin)/ng build --configuration=${ENVIRONMENT} --output-path=${OUTPUT_PATH}'
             }
         }
-        // stage ('Test')
-        // {
-        //     steps
-        //     {
-        //         sh '$(npm bin)/ng test --no-watch --no-progress --browsers=ChromeHeadlessCI'
-        //     }
-        // }
+    }
+    post
+    {
+        success
+        {
+            zip zipFile: 'webclient-package.zip', archive: true, dir: OUTPUT_PATH
+            sh 'rm -rf webclient-package.zip'
+        }
     }
 }
