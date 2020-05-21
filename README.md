@@ -21,4 +21,4 @@ Front-end for Cookwi project. Made with [angular](https://angular.io).
 
 ### Security
 
-- [here](https://auth0.com/docs/quickstart/spa/angular2) - Auth0 and angular implementation
+
