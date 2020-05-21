@@ -1,10 +1,19 @@
 pipeline {
-    agent { docker { image 'node:latest' } }
+    agent
+    {
+        docker
+        {
+            image 'node:latest',
+            args '--name ${BUILD_TAG}'
+        }
+    }
     stages {
         stage ('Install dependencies')
         {
             steps
             {
+                sh 'echo ${BUILD_TAG}'
+                sh 'echo ${changeRequest()}'
                 sh 'npm install'
             }
         }
@@ -17,6 +26,7 @@ pipeline {
         }
         stage ('Artifacts')
         {
+            when { not { changeRequest() } } // if pull_request, we don't want artifacts
             steps
             {
                 zip zipFile: 'webclient-package.zip', archive: true, dir: OUTPUT_PATH
