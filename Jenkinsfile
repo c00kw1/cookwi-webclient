@@ -1,5 +1,12 @@
 pipeline {
-    agent { docker { image 'node:latest' } }
+    agent
+    {
+        docker
+        {
+            image 'node:latest'
+            args "--name ${BUILD_TAG}"
+        }
+    }
     stages {
         stage ('Install dependencies')
         {
@@ -17,6 +24,7 @@ pipeline {
         }
         stage ('Artifacts')
         {
+            when { expression { PRODUCES_ARTEFACTS == true } } // if pull_request, we don't want artifacts
             steps
             {
                 zip zipFile: 'webclient-package.zip', archive: true, dir: OUTPUT_PATH
