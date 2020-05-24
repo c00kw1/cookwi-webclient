@@ -9,7 +9,7 @@ export const environment = {
         prefix: "api"
     },
     sso: {
-        issuer: "https://sso.cookwi.com",
+        issuer: "https://sso.cookwi.com/auth/realms/cookwi",
         clientId: ""
     }
 };
