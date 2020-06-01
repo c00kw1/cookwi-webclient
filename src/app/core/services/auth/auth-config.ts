@@ -8,9 +8,9 @@ export const authCodeFlowConfig: AuthConfig = {
     issuer: environment.sso.issuer,
     clientId: environment.sso.clientId,
     responseType: 'code',
-    redirectUri: window.location.origin + '/index.html',
+    redirectUri: window.location.origin + '/home',
     silentRefreshRedirectUri: window.location.origin + '/silent-refresh.html',
-    scope: 'openid offline_access cookwi.api.default',
+    scope: 'openid offline_access cookwi.api.default cookwi.api.admin',
     useSilentRefresh: false, // Needed for Code Flow to suggest using iframe-based refreshes
     //silentRefreshTimeout: 5000, // For faster testing
     timeoutFactor: 0.75, // For faster testing

@@ -1,0 +1,67 @@
+<div class="page-title mat-elevation-z0">
+    <h1>Inscription</h1>
+</div>
+
+<div class="page-container register-container">
+    <mat-card class="register-card mat-elevation-z6">
+        <div style="margin: auto; text-align:center;">
+            <img src="assets/pages/register.png" style="width: 20%">
+        </div>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+            <div fxLayout="row wrap" fxLayoutGap.gt-sm="30px">
+                <div fxFlex="calc(50% - 30px)" fxFlex.lt-md="100">
+                    <h2>Identifiants de connexion</h2>
+                    <p>Vos identifiants de connexion afin d'accéder à votre compte. C'est vous qui choisissez !</p>
+                    <mat-form-field class="input no-margin" appearance="outline">
+                        <mat-label>Adresse e-mail</mat-label>
+                        <mat-icon matSuffix color="primary">alternate_email</mat-icon>
+                        <input matInput formControlName="email" type="email" autocomplete="username">
+                    </mat-form-field>
+                    <mat-form-field class="input" appearance="outline">
+                        <mat-label>Mot de passe</mat-label>
+                        <mat-icon matSuffix color="primary">vpn_key</mat-icon>
+                        <input matInput #password formControlName="password" type="password" autocomplete="new-password" minlength="8">
+                        <mat-hint align="start">Min. 8 caractères {{password.value?.length || 0}}/8</mat-hint>
+                    </mat-form-field>
+                    <mat-form-field class="input no-margin" appearance="outline">
+                        <mat-label>Confirmation de mot de passe</mat-label>
+                        <mat-icon matSuffix color="primary">more_horiz</mat-icon>
+                        <input matInput formControlName="confirmPassword" type="password" autocomplete="new-password">
+                    </mat-form-field>
+                </div>
+                <div fxFlex="calc(50% - 30px)" fxFlex.lt-md="100">
+                    <h2>Informations personnelles</h2>
+                    <p>Les quelques informations dont nous avons besoin pour faire fonctionner votre compte Cookwi, et
+                        rien d'autre.</p>
+                    <mat-form-field class="input no-margin" appearance="outline">
+                        <mat-label>Nom</mat-label>
+                        <mat-icon matSuffix color="primary">face</mat-icon>
+                        <input matInput formControlName="lastName" type="text">
+                    </mat-form-field>
+                    <mat-form-field class="input no-margin" appearance="outline">
+                        <mat-label>Prénom</mat-label>
+                        <mat-icon matSuffix color="primary">face</mat-icon>
+                        <input matInput formControlName="firstName" type="text">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div fxLayout="column wrap" fxLayoutGap="30px" style="padding-top: 30px;">
+                <div fxFlex style="font-size: 12px;">
+                    <mat-checkbox formControlName="acceptTerms">
+                        J'ai lu et j'accepte les <a href="#">conditions d'utilisation</a> du site internet Cookwi
+                    </mat-checkbox>
+                </div>
+                <div fxFlex>
+                    <button mat-stroked-button color="primary" type="submit" *ngIf="!showSpin">
+                        <mat-icon inline>add_circle</mat-icon>
+                        Créer mon compte !
+                    </button>
+                    <mat-spinner diameter="20" *ngIf="showSpin"></mat-spinner>
+                </div>
+            </div>
+
+        </form>
+    </mat-card>
+</div>

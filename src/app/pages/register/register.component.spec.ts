@@ -1,13 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProfileComponent } from './profile.component';
+import { RegisterComponent } from './register.component';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { HttpClient } from '@angular/common/http';
 
 describe('ProfileComponent', () => {
-    let component: ProfileComponent;
-    let fixture: ComponentFixture<ProfileComponent>;
+    let component: RegisterComponent;
+    let fixture: ComponentFixture<RegisterComponent>;
     let authServiceStub: Partial<AuthService>;
 
     beforeEach(async(() => {
@@ -15,7 +15,7 @@ describe('ProfileComponent', () => {
             
         };
         TestBed.configureTestingModule({
-            declarations: [ProfileComponent],
+            declarations: [RegisterComponent],
             providers: [{ provide: AuthService, useValue: authServiceStub }]
         })
             .compileComponents();
@@ -24,7 +24,7 @@ describe('ProfileComponent', () => {
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(ProfileComponent);
+        fixture = TestBed.createComponent(RegisterComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

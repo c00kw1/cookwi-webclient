@@ -1,24 +1,24 @@
 .topbar {
     position: relative;
 
-    .bar-spacer {
-        flex: 1 1 auto;
-    }
+    .title {
+        flex: 0 0 auto;
+        display: inline-flex;
+        height: inherit;
+        align-items: center;
+        cursor: pointer;
 
-    .bar-icon {
-        padding: 0 14px;
-    }
+        @media screen and (max-width: 959px) {
+            margin: auto;
+        }
 
-    .bar-logo {
-        padding: 5px;
         img {
-            display: block;
-            position: relative;
-            height: 48px;
+            display: inline;
+            max-height: 100%;
         }
     }
 
-    .bar-menu {
-        padding: 25px;
+    .spacer {
+        flex: 1 1 auto;
     }
 }

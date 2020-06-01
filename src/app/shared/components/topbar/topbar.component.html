@@ -1,26 +1,117 @@
 <div class="topbar">
     <mat-toolbar color="primary" class="mat-elevation-z6">
-        <mat-toolbar-row>
-            <span class="bar-logo"><img src="/assets/logo.png"></span>
-            <span [routerLink]="['/home']" style="cursor: pointer;">Cookwi</span>
-            <div class="bar-menu">
-                <a i18n mat-button [routerLink]="['/recipes/list']" *ngIf="isLoggedIn | async">Mes recettes</a>
-            </div>
-            <span class="bar-spacer"></span>
-            <a i18n mat-button *ngIf="!(isLoggedIn | async)" (click)="login()">
-                <mat-icon>lock</mat-icon>
-                Connexion
-            </a>
-            <button i18n mat-button *ngIf="isLoggedIn | async" [matMenuTriggerFor]="menu">
-                <mat-icon>face</mat-icon>
-                {{user_identity}}
-                <mat-icon>keyboard_arrow_down</mat-icon>
+
+        <!-- MOBILE BAR -->
+        <mat-toolbar-row fxShow="true" fxHide.gt-sm="true">
+            <!-- LEFT MENU -->
+            <button mat-icon-button [matMenuTriggerFor]="leftMenu">
+                <mat-icon>menu</mat-icon>
             </button>
-            <mat-menu #menu="matMenu">
-                <button i18n mat-menu-item [routerLink]="['/profile']">Profile</button>
-                <button i18n mat-menu-item (click)="refresh()">Refresh token</button>
-                <button i18n mat-menu-item (click)="logout()">Deconnexion</button>
+            <mat-menu #leftMenu="matMenu">
+                <!-- connected -->
+                <button mat-menu-item *ngIf="isLoggedIn | async" [routerLink]="['/recipes/list']">
+                    <mat-icon>menu_book</mat-icon>
+                    Mes recettes
+                </button>
+                <!-- not connected -->
+                <button mat-menu-item *ngIf="!(isLoggedIn | async)">
+                    <mat-icon>assignment</mat-icon>
+                    M'inscrire
+                </button>
+                <!-- whatever -->
+                <button mat-menu-item>
+                    <mat-icon>contact_support</mat-icon>
+                    C'est quoi cookwi ?
+                </button>
+                <button mat-menu-item>
+                    <mat-icon>alternate_email</mat-icon>
+                    Contact
+                </button>
+            </mat-menu>
+
+            <!-- TITLE -->
+            <span class="title" [routerLink]="['/home']">
+                <img src="/assets/logo2.png" alt="Cookwi logo">
+                &nbsp;&nbsp;Cookwi
+            </span>
+
+            <!-- RIGHT MENU -->
+            <button mat-icon-button *ngIf="!(isLoggedIn | async)" (click)="login()">
+                <mat-icon>lock</mat-icon>
+            </button>
+            <button mat-icon-button *ngIf="isLoggedIn | async" [matMenuTriggerFor]="rightMenu">
+                <mat-icon>face</mat-icon>
+            </button>
+            <mat-menu #rightMenu="matMenu">
+                <button mat-menu-item [routerLink]="['/profile']">
+                    <mat-icon>face</mat-icon>
+                    Profil
+                </button>
+                <button mat-menu-item *ngIf="isAdmin()" (click)="refresh()">
+                    <mat-icon>update</mat-icon>
+                    Refresh token
+                </button>
+                <button mat-menu-item *ngIf="isAdmin()" [routerLink]="['admin']">
+                    <mat-icon>admin_panel_settings</mat-icon>
+                    Admin
+                </button>
+                <button mat-menu-item (click)="logout()">
+                    <mat-icon>power_settings_new</mat-icon>
+                    Deconnexion
+                </button>
             </mat-menu>
         </mat-toolbar-row>
+
+        <!-- FULL SIZE BAR -->
+        <mat-toolbar-row fxShow="true" fxHide.lt-md="true">
+            <!-- TITLE -->
+            <span class="title" [routerLink]="['/home']" style="margin-right: 50px;">
+                <img src="/assets/logo2.png" alt="Cookwi logo">
+                &nbsp;&nbsp;Cookwi
+            </span>
+
+            <!-- LEFT MENU -->
+            <!-- connected -->
+            <a mat-button *ngIf="isLoggedIn | async" [routerLink]="['/recipes/list']">
+                Mes recettes
+            </a>
+            <!-- not connected -->
+            <a mat-button *ngIf="!(isLoggedIn | async)">
+                M'inscrire
+            </a>
+            <!-- whatever -->
+            <a mat-button>
+                C'est quoi cookwi ?
+            </a>
+            <a mat-button>
+                Contact
+            </a>
+
+            <span class="spacer"></span>
+
+            <!-- RIGHT MENU -->
+            <button mat-icon-button *ngIf="!(isLoggedIn | async)" (click)="login()">
+                <mat-icon>lock</mat-icon>
+            </button>
+            <button mat-button *ngIf="isLoggedIn | async" [matMenuTriggerFor]="rightMenu">
+                <mat-icon>face</mat-icon>
+                {{user_identity}}
+            </button>
+            <mat-menu #rightMenu="matMenu">
+                <button mat-menu-item [routerLink]="['/profile']">
+                    <mat-icon>face</mat-icon>
+                    Profil
+                </button>
+                <button mat-menu-item (click)="refresh()">
+                    <mat-icon>update</mat-icon>
+                    Refresh token
+                </button>
+                <button mat-menu-item (click)="logout()">
+                    <mat-icon>power_settings_new</mat-icon>
+                    Deconnexion
+                </button>
+            </mat-menu>
+        </mat-toolbar-row>
+
     </mat-toolbar>
 </div>

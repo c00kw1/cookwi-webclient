@@ -10,14 +10,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { RecipesSearchPipe } from './pipes/recipes-search.pipe';
 import { TagsFilterPipe } from './pipes/tags-filter.pipe';
 import { TopbarComponent } from './components/topbar/topbar.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FooterComponent } from './components/footer/footer.component';
+import { TimePipe } from './pipes/time.pipe';
 
 @NgModule({
-  declarations: [TopbarComponent, RecipesSearchPipe, TagsFilterPipe],
+  declarations: [TopbarComponent, RecipesSearchPipe, TagsFilterPipe, FooterComponent, TimePipe],
   imports: [
-    CommonModule, RouterModule,
+    CommonModule, RouterModule, FlexLayoutModule,
     MatToolbarModule, MatIconModule, MatButtonModule,
     MatMenuModule
   ],
-  exports: [TopbarComponent, RecipesSearchPipe, TagsFilterPipe]
+  exports: [TopbarComponent, RecipesSearchPipe, TagsFilterPipe, FooterComponent, TimePipe]
 })
 export class SharedModule { }

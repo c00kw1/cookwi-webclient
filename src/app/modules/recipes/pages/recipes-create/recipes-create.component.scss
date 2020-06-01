@@ -1,17 +1,25 @@
 .create-container {
-    width: 40% !important;
+    width: 50% !important;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
     @media screen and (max-width: 1919px) {
-        width: 50% !important;
-    }
-    @media screen and (max-width: 1279px) {
         width: 60% !important;
     }
-    @media screen and (max-width: 959px) {
+    @media screen and (max-width: 1279px) {
         width: 70% !important;
     }
-    @media screen and (max-width: 599px) {
-        width: 85% !important;
+    @media screen and (max-width: 959px) {
+        width: 80% !important;
     }
+    @media screen and (max-width: 599px) {
+        width: 100% !important;
+        padding: 0;
+    }
+}
+
+.form-section {
+    padding-bottom: 30px;
 }
 
 .section {
