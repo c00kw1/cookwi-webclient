@@ -8,6 +8,8 @@ export class Recipe {
     public title: string;
     public dateCreation: Date;
     public description: string;
+    public cookingTime: string;
+    public bakingTime: string;
     public imagePath: string;
     public tags: Tag[];
     public ingredients: Ingredient[];
@@ -16,6 +18,8 @@ export class Recipe {
     constructor() {
         this.title = "";
         this.description = "";
+        this.cookingTime = "00:00";
+        this.cookingTime = "00:00";
         this.imagePath = "";
         this.tags = [];
         this.ingredients = [];

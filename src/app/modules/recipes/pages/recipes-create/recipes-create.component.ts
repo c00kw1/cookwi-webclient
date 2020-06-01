@@ -1,18 +1,19 @@
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
+import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { startWith, map } from 'rxjs/operators';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Recipe } from 'src/app/shared/models/recipe.model';
 import { Tag } from 'src/app/shared/models/tag.model';
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { TagsService } from 'src/app/core/services/tags.service';
 import { RecipesService } from 'src/app/core/services/recipes.service';
 import { Step } from 'src/app/shared/models/step.model';
 import { Ingredient } from 'src/app/shared/models/ingredient.model';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-recipes-create',
@@ -22,7 +23,7 @@ import { Ingredient } from 'src/app/shared/models/ingredient.model';
 export class RecipesCreateComponent implements OnInit {
 
     public imagePath: string = "";
-    public defaultImage: string = "/assets/no-image-found.png";
+    public defaultImage: string = "/assets/no-image.jpg";
 
     public recipe: Recipe;
     public form: FormGroup;
@@ -31,10 +32,11 @@ export class RecipesCreateComponent implements OnInit {
     @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
     constructor(
-        private recipesService: RecipesService,
-        private tagsService: TagsService,
-        private formBuilder: FormBuilder,
-        private snackBar: MatSnackBar
+        private _recipesService: RecipesService,
+        private _tagsService: TagsService,
+        private _formBuilder: FormBuilder,
+        private _snackBar: MatSnackBar,
+        private _router: Router
     ) {
         this.recipe = new Recipe();
         this.recipe.tags = this.selectedTags;
@@ -43,7 +45,7 @@ export class RecipesCreateComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.tagsService.getAllTags().subscribe(res => {
+        this._tagsService.getAllTags().subscribe(res => {
             this.allTags = res;
             this.filteredTags = this.tagCtrl.valueChanges.pipe(
                 startWith(null),
@@ -53,27 +55,55 @@ export class RecipesCreateComponent implements OnInit {
             );
         });
 
-        this.recipesService.getAllQuantityUnits().subscribe(res => {
+        this._recipesService.getAllQuantityUnits().subscribe(res => {
             this.quantityUnits = res;
         });
 
         // form group construction
-        this.form = this.formBuilder.group(this.recipe);
+        this.form = this._formBuilder.group({
+            title: ['', Validators.required],
+            description: ['', Validators.required],
+            cookingTime: ['00:00', Validators.required],
+            bakingTime: ['00:00'],
+            imagePath: [''],
+            tags: [this.selectedTags],
+            ingredients: [this.ingredients, Validators.minLength(1)],
+            steps: [this.steps, Validators.minLength(1)],
+        });
         // we have to manually set the FormControl for tags because :
         // tags are not coming from an input but from a string[] filled by an input
         // if one day we need to validate tags, this class need transformation again https://www.dev6.com/angular/angular-material-chips-with-reactive-forms-and-custom-validation/
-        this.form.controls['tags'].setValue(this.selectedTags);
+        this.tagCtrl.setValue(this.selectedTags);
     }
 
-    onSubmit(newRecipe: Recipe) {
+    onSubmit() {
+        if (!this.form.valid) {
+            this._snackBar.open("Des champs ne sont pas correct", "Fermer", { duration: 5_000 });
+            return;
+        }
         // we send the recipe
-        newRecipe.ingredients = this.ingredients;
-        newRecipe.steps = this.steps;
-        this.recipesService.createOne(newRecipe).subscribe(res => {
+        let newRecipe: Recipe = {
+            id: '',
+            ownerId: '',
+            dateCreation: new Date(),
+            title: this.form.value['title'],
+            description: this.form.value['description'],
+            cookingTime: this.form.value['cookingTime'],
+            bakingTime: this.form.value['bakingTime'],
+            imagePath: this.form.value['imagePath'],
+            tags: this.form.value['tags'],
+            ingredients: this.form.value['ingredients'],
+            steps: this.form.value['steps']
+        };
+        this._recipesService.createOne(newRecipe).subscribe(res => {
             this.form.reset();
             this.selectedTags = [];
+            this.ingredients = [];
+            this.quantityUnits = [];
             this.steps = [];
-            this.snackBar.open("Recipe created :-)", "Fermer", { duration: 3000 });
+            this._router.navigate(["recipes/list"]).then(() => {
+                this._snackBar.open("Recette ajoutée !", "Fermer", { duration: 5_000 });
+            });
         });
     }
 
@@ -158,4 +188,13 @@ export class RecipesCreateComponent implements OnInit {
     }
 
     //#endregion
+
+    computeTotalTime(time1: string, time2: string): string {
+        var hour1 = parseInt(time1.split(':')[0]) || 0;
+        var hour2 = parseInt(time2.split(':')[0]) || 0;
+        var minute1 = parseInt(time1.split(':')[1]) || 0;
+        var minute2 = parseInt(time2.split(':')[1]) || 0;
+
+        return `${hour1+hour2}h ${minute1+minute2}min`;
+    }
 }

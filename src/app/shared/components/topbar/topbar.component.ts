@@ -21,6 +21,7 @@ export class TopbarComponent implements OnInit {
     public login(): void { this.authService.login(); }
     public logout(): void { this.authService.logout(); }
     public refresh(): void { this.authService.refresh(); }
+    public isAdmin(): boolean { return this.authService.isAdmin(); }
     
     get user_identity(): string {
         return this.authService.identityClaims

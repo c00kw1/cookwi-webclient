@@ -160,15 +160,29 @@ export class AuthService {
             .catch(() => this.isDoneLoadingSubject$.next(true));
     }
 
-    public login(targetUrl?: string) {
+    public login() {
         // Note: before version 9.1.0 of the library you needed to
         // call encodeURIComponent on the argument to the method.
-        this.oauthService.initLoginFlow(targetUrl || this.router.url);
+        this.oauthService.initLoginFlow();
     }
 
     public logout() { this.oauthService.logOut(); }
     public refresh() { this.oauthService.refreshToken(); }
     public hasValidToken() { return this.oauthService.hasValidAccessToken(); }
+    public scopes() {
+        let scopes: string[] = [];
+        let tmp = this.oauthService.getGrantedScopes();
+        if (tmp) {
+            let scopeStr = tmp[0] as string;
+            if (scopeStr) {
+                scopes = scopeStr.split(" ");
+            }
+        }
+        return scopes;
+    }
+    public isAdmin() {
+        return this.scopes().includes("cookwi.api.admin");
+    }
 
     // These normally won't be exposed from a service like this, but
     // for debugging it makes sense.

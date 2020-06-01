@@ -1,4 +1,5 @@
-import {MatSelectModule} from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSelectModule } from '@angular/material/select';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RecipesRoutingModule } from './recipes-routing.module';
@@ -31,7 +32,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
         MatCardModule, MatInputModule, MatChipsModule,
         MatGridListModule, FormsModule, MatAutocompleteModule,
         ReactiveFormsModule, MatSnackBarModule, DragDropModule,
-        MatSelectModule,
+        MatSelectModule, MatTooltipModule,
         SharedModule
     ]
 })

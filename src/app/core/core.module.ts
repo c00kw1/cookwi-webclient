@@ -9,6 +9,9 @@ import { authCodeFlowConfig } from './services/auth/auth-config';
 import { authModuleConfig } from './services/auth/auth-module-config';
 import { RecipesService } from './services/recipes.service';
 import { TagsService } from './services/tags.service';
+import { PreventLoggedInAccessGuard } from './services/auth/preventLoggedInAccess.guard';
+import { UsersService } from './services/users.service';
+import { AuthAdminGuard } from './services/auth/auth.admin.guard';
 
 export function storageFactory(): OAuthStorage {
     return localStorage;
@@ -26,7 +29,9 @@ export function storageFactory(): OAuthStorage {
         RecipesService,
         TagsService,
         AuthService,
-        AuthGuard,
+        AuthGuard, AuthAdminGuard,
+        PreventLoggedInAccessGuard,
+        UsersService,
     ],
 })
 export class CoreModule {

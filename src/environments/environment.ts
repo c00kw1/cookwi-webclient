@@ -13,7 +13,7 @@ export const environment = {
         prefix: "api"
     },
     sso: {
-        issuer: "http://localhost:8081/auth/realms/cookwi",
+        issuer: "https://sso.hom.cookwi.com/auth/realms/cookwi",
         clientId: "cookwi-webclient"
     }
 };
