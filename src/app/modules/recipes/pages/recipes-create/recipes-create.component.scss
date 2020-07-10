@@ -42,10 +42,21 @@
     }
 }
 
-.recipe-img {
-    background-color: #f3f4f6;
-    max-height: 400px;
-    object-fit: cover;
+.recipe-photo-area {
+    position: relative;
+
+    .recipe-img {
+        background-color: #f3f4f6;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        max-height: 400px;
+        object-fit: cover;
+    }
+    .recipe-img-upload {
+        position: absolute;
+        bottom: 35px;
+        right: 0px;
+    }
 }
 
 .input {
