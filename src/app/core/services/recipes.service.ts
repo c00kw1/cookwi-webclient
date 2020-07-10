@@ -28,6 +28,12 @@ export class RecipesService {
         return this.http.post<Recipe>(this.api, JSON.stringify(recipe), { headers: headers });
     }
 
+    sendImage(image: File, recipeId: string): Observable<void> {
+        let uploadData = new FormData();
+        uploadData.append('file', image, image.name);
+        return this.http.post<void>(this.api + "/" + recipeId + "/image", uploadData);
+    }
+
     getAllQuantityUnits(): Observable<string[]> {
         return this.http.get<string[]>(this.api + "/quantity-units", { headers: headers });
     }

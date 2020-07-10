@@ -58,12 +58,9 @@ export class RecipesGridComponent implements OnInit, OnChanges {
         const input = event.input;
         const value = event.value;
 
-        // Add our fruit
         if ((value || '').trim()) {
             this.selectedTags.push(value.trim().toLowerCase());
         }
-
-        // Reset the input value
         if (input) {
             input.value = '';
         }
