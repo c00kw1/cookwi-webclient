@@ -184,15 +184,16 @@
 
 <mat-divider></mat-divider>
 <div style="margin-top: 20px; text-align: right;">
-    <button mat-stroked-button [routerLink]="['/recipes/list']" color="warn" type="button">
+    <button mat-stroked-button [routerLink]="['/recipes/list']" color="warn" type="button" *ngIf="!this.showSpin">
         <mat-icon inline>cancel</mat-icon>
         Annuler
     </button>
     &nbsp;&nbsp;
-    <button mat-stroked-button color="primary" type="submit">
+    <button mat-stroked-button color="primary" type="submit" *ngIf="!this.showSpin">
         <mat-icon inline>add_circle</mat-icon>
         Ajouter
     </button>
+    <mat-spinner diameter="20" *ngIf="showSpin"></mat-spinner>
 </div>
 </form>
 </mat-card-content>

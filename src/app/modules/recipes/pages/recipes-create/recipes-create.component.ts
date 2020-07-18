@@ -28,6 +28,8 @@ export class RecipesCreateComponent implements OnInit {
     
     public recipe: Recipe;
     public form: FormGroup;
+
+    public showSpin: boolean;
     
     @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
     @ViewChild('auto') matAutocomplete: MatAutocomplete;
@@ -39,6 +41,7 @@ export class RecipesCreateComponent implements OnInit {
         private _router: Router
         )
     {
+        this.showSpin = false;
         this.recipe = new Recipe();
         this.recipe.tags = this.selectedTags;
         this.ingredients.push(new Ingredient());
@@ -95,6 +98,7 @@ export class RecipesCreateComponent implements OnInit {
             ingredients: this.form.value['ingredients'],
             steps: this.form.value['steps']
         };
+        this.showSpin = true;
         this._recipesService.createOne(newRecipe).subscribe(res => {
             this._recipesService.sendImage(this.imageFile, res.id).subscribe(res => {
                 this.form.reset();
@@ -104,6 +108,7 @@ export class RecipesCreateComponent implements OnInit {
                 this.ingredients = [];
                 this.quantityUnits = [];
                 this.steps = [];
+                this.showSpin = false;
                 this._router.navigate(["recipes/list"]).then(() => {
                     this._snackBar.open("Recette ajoutée !", "Fermer", { duration: 5_000 });
                 });

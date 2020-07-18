@@ -24,6 +24,10 @@ export class RecipesService {
         return this.http.get<Recipe[]>(this.api, { headers: headers });
     }
 
+    getOne(id: string): Observable<Recipe> {
+        return this.http.get<Recipe>(this.api + `/${id}`, { headers: headers });
+    }
+
     createOne(recipe: Recipe): Observable<Recipe> {
         return this.http.post<Recipe>(this.api, JSON.stringify(recipe), { headers: headers });
     }
