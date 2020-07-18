@@ -21,9 +21,11 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RecipesCreateComponent } from './pages/recipes-create/recipes-create.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { RecipeViewComponent } from './pages/recipe-view/recipe-view.component';
 
 @NgModule({
-    declarations: [RecipesListComponent, RecipesGridComponent, RecipesCreateComponent],
+    declarations: [RecipesListComponent, RecipesGridComponent, RecipesCreateComponent, RecipeViewComponent],
     imports: [
         CommonModule,
         RecipesRoutingModule,
@@ -32,7 +34,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
         MatCardModule, MatInputModule, MatChipsModule,
         MatGridListModule, FormsModule, MatAutocompleteModule,
         ReactiveFormsModule, MatSnackBarModule, DragDropModule,
-        MatSelectModule, MatTooltipModule,
+        MatSelectModule, MatTooltipModule, MatProgressSpinnerModule,
         SharedModule
     ]
 })
