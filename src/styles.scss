@@ -35,6 +35,13 @@ body {
     padding-bottom: 30px;
 }
 
+.page-spinner {
+    z-index: 1000;
+    position: absolute;
+    top: calc(50% - 50px);
+    left: calc(50% - 50px);
+}
+
 // https://github.com/angular/components/issues/8416
 .mat-checkbox-layout {
     white-space: normal !important;

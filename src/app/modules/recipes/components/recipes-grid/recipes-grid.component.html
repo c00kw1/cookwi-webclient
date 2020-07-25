@@ -74,10 +74,10 @@
 
                 </mat-card-content>
                 <mat-card-actions>
-                    <button class="card-action-button" mat-button color="primary">
+                    <a class="card-action-button" mat-button color="primary" [routerLink]="['/recipes/view/', recipe.id]">
                         Voir
                         <mat-icon class="card-action-button-icon">navigate_next</mat-icon>
-                    </button>
+                    </a>
                 </mat-card-actions>
             </mat-card>
         </div>
