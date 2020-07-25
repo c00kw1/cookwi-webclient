@@ -1,3 +1,4 @@
+import {MatDialogModule} from '@angular/material/dialog';
 import {MatMenuModule} from '@angular/material/menu';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -13,14 +14,18 @@ import { TopbarComponent } from './components/topbar/topbar.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FooterComponent } from './components/footer/footer.component';
 import { TimePipe } from './pipes/time.pipe';
+import { SimpleDialogComponent } from './components/simple-dialog/simple-dialog.component';
 
 @NgModule({
-  declarations: [TopbarComponent, RecipesSearchPipe, TagsFilterPipe, FooterComponent, TimePipe],
-  imports: [
-    CommonModule, RouterModule, FlexLayoutModule,
-    MatToolbarModule, MatIconModule, MatButtonModule,
-    MatMenuModule
-  ],
-  exports: [TopbarComponent, RecipesSearchPipe, TagsFilterPipe, FooterComponent, TimePipe]
+    declarations: [TopbarComponent, RecipesSearchPipe, TagsFilterPipe, FooterComponent, TimePipe, SimpleDialogComponent],
+    imports: [
+        CommonModule, RouterModule, FlexLayoutModule,
+        MatToolbarModule, MatIconModule, MatButtonModule,
+        MatMenuModule, MatDialogModule
+    ],
+    exports: [
+        TopbarComponent, RecipesSearchPipe, TagsFilterPipe,
+        FooterComponent, TimePipe, SimpleDialogComponent
+    ]
 })
 export class SharedModule { }

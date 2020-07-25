@@ -1,7 +1,11 @@
 <div class="page-title mat-elevation-z0">
-    <h1>{{this.title}}</h1>
+    <h1>{{(recipe$ | async)?.title}}</h1>
 </div>
 
 <div class="page-container list-container">
     
+</div>
+
+<div class="page-spinner">
+    <mat-spinner *ngIf="loading" [diameter]="50"></mat-spinner>
 </div>

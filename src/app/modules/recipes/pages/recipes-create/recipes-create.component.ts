@@ -45,7 +45,7 @@ export class RecipesCreateComponent implements OnInit {
         this.recipe = new Recipe();
         this.recipe.tags = this.selectedTags;
         this.ingredients.push(new Ingredient());
-        this.steps.push(new Step(1, ""))
+        this.steps.push(new Step(1, ""));
     }
         
     ngOnInit(): void {
