@@ -20,4 +20,6 @@ export class SimpleDialogComponent implements OnInit {
 export interface SimpleDialogData {
     title: string;
     message: string;
+    closeButton: string;
+    closeButtonIcon: string;
 }

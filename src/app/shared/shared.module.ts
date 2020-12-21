@@ -15,9 +15,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FooterComponent } from './components/footer/footer.component';
 import { TimePipe } from './pipes/time.pipe';
 import { SimpleDialogComponent } from './components/simple-dialog/simple-dialog.component';
+import { OrderByPipe } from './pipes/order-by.pipe';
 
 @NgModule({
-    declarations: [TopbarComponent, RecipesSearchPipe, TagsFilterPipe, FooterComponent, TimePipe, SimpleDialogComponent],
+    declarations: [TopbarComponent, RecipesSearchPipe, TagsFilterPipe, FooterComponent, TimePipe, SimpleDialogComponent, OrderByPipe],
     imports: [
         CommonModule, RouterModule, FlexLayoutModule,
         MatToolbarModule, MatIconModule, MatButtonModule,
@@ -25,7 +26,8 @@ import { SimpleDialogComponent } from './components/simple-dialog/simple-dialog.
     ],
     exports: [
         TopbarComponent, RecipesSearchPipe, TagsFilterPipe,
-        FooterComponent, TimePipe, SimpleDialogComponent
+        FooterComponent, TimePipe, SimpleDialogComponent,
+        OrderByPipe
     ]
 })
 export class SharedModule { }

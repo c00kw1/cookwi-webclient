@@ -3,19 +3,19 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-    production: false,
-    homologation: false,
-    dev: true,
-    api: {
-        scheme: "http",
-        hostname: "localhost",
-        port: 5000,
-        prefix: "api"
-    },
-    sso: {
-        issuer: "https://sso.hom.cookwi.com/auth/realms/cookwi",
-        clientId: "cookwi-webclient"
-    }
+  production: false,
+  homologation: false,
+  dev: true,
+  api: {
+    scheme: 'http',
+    hostname: 'localhost',
+    port: 5000,
+    prefix: 'api',
+  },
+  sso: {
+    issuer: 'http://localhost:8081/auth/realms/cookwi2',
+    clientId: 'cookwi-webclient',
+  },
 };
 
 /*

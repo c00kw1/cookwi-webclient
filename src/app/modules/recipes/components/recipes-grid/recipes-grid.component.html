@@ -1,85 +1,142 @@
 <!-- Add FAB -->
 <div class="fab">
-    <button routerLink="/recipes/create" mat-fab color="accent" aria-label="Add a recipe">
-        <mat-icon>add</mat-icon>
-    </button>
+  <button
+    routerLink="/recipes/create"
+    mat-fab
+    color="accent"
+    aria-label="Add a recipe"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
 </div>
 
 <!-- search engine -->
 <div class="search-container">
-    <div fxLayout="row wrap" fxLayout.lt-lg="column" fxLayoutGap="16px" fxLayoutAlign="center">
-        <div fxFlex="0 1 calc(50% - 16px)" fxFlex.lt-lg="100%">
-            <mat-form-field class="search-input">
-                <mat-icon matSuffix>search</mat-icon>
-                <input matInput type="text" placeholder="Rechercher" [(ngModel)]="searchText">
-            </mat-form-field>
-        </div>
-        <div fxFlex="0 1 calc(50%)">
-            <mat-form-field class="search-input">
-                <mat-chip-list #chipList aria-label="Tag selection">
-                    <mat-chip *ngFor="let tag of selectedTags" [selectable]="true" [removable]="true"
-                        (removed)="remove(tag)">
-                        {{tag}}
-                        <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
-                    </mat-chip>
-                    <input placeholder="Tags" #tagInput [formControl]="tagCtrl" [matAutocomplete]="auto"
-                        [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                        (matChipInputTokenEnd)="add($event)">
-                </mat-chip-list>
-                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-                    <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
-                        {{tag}}
-                    </mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
-        </div>
+  <div
+    fxLayout="row wrap"
+    fxLayout.lt-lg="column"
+    fxLayoutGap="16px"
+    fxLayoutAlign="center"
+  >
+    <div fxFlex="0 1 calc(50% - 16px)" fxFlex.lt-lg="100%">
+      <mat-form-field class="search-input">
+        <mat-icon matSuffix>search</mat-icon>
+        <input
+          matInput
+          type="text"
+          placeholder="Rechercher"
+          [(ngModel)]="searchText"
+        />
+      </mat-form-field>
     </div>
+    <div fxFlex="0 1 calc(50%)">
+      <mat-form-field class="search-input">
+        <mat-chip-list #chipList aria-label="Tag selection">
+          <mat-chip
+            *ngFor="let tag of selectedTags"
+            [selectable]="true"
+            [removable]="true"
+            (removed)="remove(tag)"
+          >
+            {{ tag }}
+            <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+          </mat-chip>
+          <input
+            placeholder="Tags"
+            #tagInput
+            [formControl]="tagCtrl"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="add($event)"
+          />
+        </mat-chip-list>
+        <mat-autocomplete
+          #auto="matAutocomplete"
+          (optionSelected)="selected($event)"
+        >
+          <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+            {{ tag }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+  </div>
 </div>
 
 <!-- list -->
 <div class="recipes-list-container">
-    <div fxLayout="row wrap" fxLayoutGap="28px grid" fxLayoutAlign="start">
-        <div fxFlex="0 1 calc(25%)" fxFlex.lt-xl="0 1 calc(33.33%)" fxFlex.lt-lg="0 1 calc(50%)"
-            fxFlex.lt-md="0 1 calc(100%)"
-            *ngFor="let recipe of showedRecipes | recipesSearch: searchText | tagsFilter: selectedTags">
-            <mat-card class="recipe-card">
-                <img class="recipe-img" mat-card-image src="{{recipe.imagePath || noImagePath}}">
-                <mat-card-header>
-                    <mat-card-title>{{recipe.title}}</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                    <p>
-                        {{recipe.description}}
-                    </p>
-                    <mat-chip-list aria-label="Tags">
-                        <mat-chip *ngFor="let tag of recipe.tags">{{tag.name}}</mat-chip>
-                    </mat-chip-list>
+  <div fxLayout="row wrap" fxLayoutGap="28px grid" fxLayoutAlign="start">
+    <div
+      fxFlex="0 1 calc(25%)"
+      fxFlex.lt-xl="0 1 calc(33.33%)"
+      fxFlex.lt-lg="0 1 calc(50%)"
+      fxFlex.lt-md="0 1 calc(100%)"
+      *ngFor="
+        let recipe of showedRecipes
+          | recipesSearch: searchText
+          | tagsFilter: selectedTags
+      "
+    >
+      <mat-card class="recipe-card">
+        <img
+          class="recipe-img"
+          mat-card-image
+          src="{{ recipe.imagePath || noImagePath }}"
+          [routerLink]="['/recipes/view/', recipe.id]"
+        />
+        <mat-card-header>
+          <mat-card-title>{{ recipe.title }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            {{ recipe.description }}
+          </p>
+          <mat-chip-list aria-label="Tags">
+            <mat-chip *ngFor="let tag of recipe.tags">{{ tag }}</mat-chip>
+          </mat-chip-list>
 
-                    <div style="padding-top:20px;">
-                        <div fxLayout="row" fxLayoutGap="5px">
-                            <div fxFlex="50">
-                                <div fxLayout="row" fxLayoutAlign="start center" matTooltip="Temps de préparation">
-                                    <mat-icon fxFlex="0 0 30px" style="padding-right: 5px;">room_service</mat-icon>
-                                    <div fxFlex>{{recipe.cookingTime | time}}</div>
-                                </div>
-                            </div>
-                            <div fxFlex="50">
-                                <div fxLayout="row" fxLayoutAlign="start center" matTooltip="Temps de cuisson">
-                                    <mat-icon fxFlex="0 0 30px" style="padding-right: 5px;">outdoor_grill</mat-icon>
-                                    <div fxFlex>{{recipe.bakingTime | time}}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </mat-card-content>
-                <mat-card-actions>
-                    <a class="card-action-button" mat-button color="primary" [routerLink]="['/recipes/view/', recipe.id]">
-                        Voir
-                        <mat-icon class="card-action-button-icon">navigate_next</mat-icon>
-                    </a>
-                </mat-card-actions>
-            </mat-card>
-        </div>
+          <div style="padding-top: 20px">
+            <div fxLayout="row" fxLayoutGap="5px">
+              <div fxFlex="50">
+                <div
+                  fxLayout="row"
+                  fxLayoutAlign="start center"
+                  matTooltip="Temps de préparation"
+                >
+                  <mat-icon fxFlex="0 0 30px" style="padding-right: 5px"
+                    >room_service</mat-icon
+                  >
+                  <div fxFlex>{{ recipe.cookingTime | time }}</div>
+                </div>
+              </div>
+              <div fxFlex="50">
+                <div
+                  fxLayout="row"
+                  fxLayoutAlign="start center"
+                  matTooltip="Temps de cuisson"
+                >
+                  <mat-icon fxFlex="0 0 30px" style="padding-right: 5px"
+                    >outdoor_grill</mat-icon
+                  >
+                  <div fxFlex>{{ recipe.bakingTime | time }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <a
+            class="card-action-button"
+            mat-button
+            color="primary"
+            [routerLink]="['/recipes/view/', recipe.id]"
+          >
+            Voir
+            <mat-icon class="card-action-button-icon">navigate_next</mat-icon>
+          </a>
+        </mat-card-actions>
+      </mat-card>
     </div>
+  </div>
 </div>

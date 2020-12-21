@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { RecipesRoutingModule } from './recipes-routing.module';
 import { RecipesListComponent } from './pages/recipes-list/recipes-list.component';
 import { RecipesGridComponent } from './components/recipes-grid/recipes-grid.component';
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -19,23 +18,38 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { SharedModule } from 'src/app/shared/shared.module';
-import { RecipesCreateComponent } from './pages/recipes-create/recipes-create.component';
+import { RecipesEditComponent } from './pages/recipes-edit/recipes-edit.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RecipeViewComponent } from './pages/recipe-view/recipe-view.component';
 
 @NgModule({
-    declarations: [RecipesListComponent, RecipesGridComponent, RecipesCreateComponent, RecipeViewComponent],
-    imports: [
-        CommonModule,
-        RecipesRoutingModule,
-        FlexLayoutModule,
-        MatButtonModule, MatIconModule, MatListModule,
-        MatCardModule, MatInputModule, MatChipsModule,
-        MatGridListModule, FormsModule, MatAutocompleteModule,
-        ReactiveFormsModule, MatSnackBarModule, DragDropModule,
-        MatSelectModule, MatTooltipModule, MatProgressSpinnerModule,
-        SharedModule
-    ]
+  declarations: [
+    RecipesListComponent,
+    RecipesGridComponent,
+    RecipesEditComponent,
+    RecipeViewComponent,
+  ],
+  imports: [
+    CommonModule,
+    RecipesRoutingModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatIconModule,
+    MatListModule,
+    MatCardModule,
+    MatInputModule,
+    MatChipsModule,
+    MatGridListModule,
+    FormsModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
+    MatSnackBarModule,
+    DragDropModule,
+    MatSelectModule,
+    MatTooltipModule,
+    MatProgressSpinnerModule,
+    SharedModule,
+  ],
 })
-export class RecipesModule { }
+export class RecipesModule {}

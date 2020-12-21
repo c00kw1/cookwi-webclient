@@ -31,7 +31,8 @@
                         "styles": [
                             "src/variables.scss",
                             "src/theme.scss",
-                            "src/styles.scss"
+                            "src/styles.scss",
+                            "src/assets/fonts/material-icons/material-icons.css"
                         ],
                         "scripts": []
                     },

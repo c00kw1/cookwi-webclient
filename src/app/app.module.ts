@@ -20,11 +20,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { LoginComponent } from './pages/login/login.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
-    HomeComponent, RegisterComponent,
-    AppComponent, NotFoundComponent, ShouldLoginComponent, LoginComponent
+    HomeComponent,
+    RegisterComponent,
+    AppComponent,
+    NotFoundComponent,
+    ShouldLoginComponent,
+    LoginComponent,
   ],
   imports: [
     CoreModule.forRoot(),
@@ -32,13 +37,20 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     BrowserAnimationsModule,
     SharedModule,
     FlexLayoutModule,
-    MatCardModule, MatIconModule, MatButtonModule,
-    MatFormFieldModule, MatInputModule, MatCheckboxModule,
-    MatSnackBarModule, MatProgressSpinnerModule,
-    FormsModule, ReactiveFormsModule,
-    AppRoutingModule
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCheckboxModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
+    MatTooltipModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AppRoutingModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
