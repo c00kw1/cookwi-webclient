@@ -1,11 +1,128 @@
 <div class="page-title mat-elevation-z0">
-    <h1>{{(recipe$ | async)?.title}}</h1>
+  <h1 *ngIf="!loading">Ma recette : {{ recipe.title }}</h1>
+  <h1 *ngIf="loading">Loading ...</h1>
 </div>
 
-<div class="page-container list-container">
-    
-</div>
-
-<div class="page-spinner">
-    <mat-spinner *ngIf="loading" [diameter]="50"></mat-spinner>
+<div class="page-container view-container">
+  <div *ngIf="loading">Loading ...</div>
+  <mat-card class="mat-elevation-z4" *ngIf="!loading">
+    <!-- IMAGE -->
+    <div class="recipe-img-area">
+      <img
+        class="recipe-img"
+        mat-card-image
+        [src]="recipe.imagePath || defaultImage"
+      />
+      <div class="recipe-img-back">
+        <button
+          type="button"
+          mat-raised-button
+          [routerLink]="['/recipes/list']"
+        >
+          <mat-icon>keyboard_backspace</mat-icon>
+          Retour à la liste
+        </button>
+      </div>
+      <div class="recipe-img-update">
+        <button
+          type="button"
+          mat-raised-button
+          [routerLink]="['/recipes/edit/', recipe.id]"
+        >
+          <mat-icon>edit</mat-icon>
+          Modifier
+        </button>
+      </div>
+      <div class="recipe-img-timings mat-elevation-z4">
+        <div
+          class="recipe-img-timings-content"
+          fxLayout="row"
+          fxLayoutAlign="center center"
+        >
+          <span
+            fxFlex="0 0 50%"
+            fxFlexAlign="center"
+            matTooltip="Temps de préparation"
+          >
+            <mat-icon matSuffix style="color: white">room_service</mat-icon>
+            {{ recipe.cookingTime | time }}
+          </span>
+          <span
+            fxFlex="0 0 50%"
+            fxFlexAlign="center"
+            matTooltip="Temps de cuisson"
+          >
+            <mat-icon matSuffix style="color: white">outdoor_grill</mat-icon>
+            {{ recipe.bakingTime | time }}
+          </span>
+        </div>
+      </div>
+    </div>
+    <mat-card-content>
+      <!-- GENERAL INFORMATIONS -->
+      <div class="section">
+        <h2 class="section-title">
+          <mat-icon>assignment</mat-icon>
+          Informations générales
+        </h2>
+        <p>{{ recipe.description }}</p>
+      </div>
+      <!-- INGREDIENTS -->
+      <div class="section">
+        <h2 class="section-title">
+          <mat-icon>kitchen</mat-icon>
+          Ingrédients
+        </h2>
+        <div
+          class="recipe-ingredients-list"
+          fxLayout="row wrap"
+          fxLayoutGap="20px grid"
+        >
+          <span
+            *ngFor="let ing of recipe.ingredients"
+            fxFlex="calc(50% - 20px)"
+            fxFlexAlign="center"
+          >
+            <div
+              class="recipe-ingredient-row"
+              fxLayout="row"
+              fxLayoutGap="10px"
+              fxLayoutAlign="start center"
+            >
+              <span fxFlex="0 0 24px">
+                <mat-icon>done</mat-icon>
+              </span>
+              <span fxFlex="15%" style="text-align: right">
+                {{ ing.quantity }}{{ ing.unit !== "unité" ? ing.unit : "" }}
+              </span>
+              <span fxFlex="0 0 5px"> - </span>
+              <span fxFlex fxFill>
+                {{ ing.name }}
+              </span>
+            </div>
+          </span>
+        </div>
+      </div>
+      <!-- STEPS -->
+      <div class="section">
+        <h2 class="section-title">
+          <mat-icon>list</mat-icon>
+          Étapes
+        </h2>
+        <div
+          class="recipe-steps-list"
+          fxLayout="row"
+          fxLayoutGap="20px"
+          *ngFor="let step of recipe.steps | orderBy: 'position'"
+        >
+          <div class="recipe-steps-number" fxFlex="50px" fxFlexAlign="start">
+            {{ step.position }}
+          </div>
+          <div fxFlex fxFill fxFlexAlign="center">
+            {{ step.content }}
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>

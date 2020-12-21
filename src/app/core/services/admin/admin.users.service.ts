@@ -1,8 +1,7 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { Invitation } from 'src/app/shared/models/admin/invitation.model';
 import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
-import { User } from 'src/app/shared/models/user.model';
 
 const headers = new HttpHeaders({
   'Content-Type': 'application/json',
@@ -11,19 +10,17 @@ const headers = new HttpHeaders({
 @Injectable({
   providedIn: 'root',
 })
-export class UsersService {
+export class AdminUsersService {
   private api: string;
-  private controller: string = 'users';
+  private controller: string = 'admin/users';
 
   constructor(private http: HttpClient) {
     this.api = `${environment.api.scheme}://${environment.api.hostname}:${environment.api.port}/${environment.api.prefix}/${this.controller}`;
   }
 
-  registerUser(id: string, user: User): Observable<User> {
-    return this.http.post<User>(
-      this.api + '/register/' + id,
-      JSON.stringify(user),
-      { headers: headers }
-    );
+  generateInvitation() {
+    return this.http.get<Invitation>(this.api + '/invitations/create', {
+      headers: headers,
+    });
   }
 }

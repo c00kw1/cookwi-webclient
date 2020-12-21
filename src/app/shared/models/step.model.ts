@@ -1,10 +1,9 @@
 export class Step {
-    
-    constructor(stepNumber: number, content: string) {
-        this.stepNumber = stepNumber;
-        this.content = content;
-    }
+  constructor(position: number, content: string) {
+    this.position = position;
+    this.content = content;
+  }
 
-    public stepNumber: number;
-    public content: string;
+  public position: number;
+  public content: string;
 }
