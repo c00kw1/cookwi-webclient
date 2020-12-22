@@ -7,7 +7,7 @@
             "projectType": "application",
             "schematics": {
                 "@schematics/angular:component": {
-                    "styleext": "scss"
+                    "style": "scss"
                 }
             },
             "root": "",
@@ -160,7 +160,7 @@
     "defaultProject": "cookwi-webclient",
     "schematics": {
         "@schematics/angular:component": {
-            "styleext": "scss"
+            "style": "scss"
         }
     }
 }
