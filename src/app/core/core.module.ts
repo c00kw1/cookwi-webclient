@@ -22,6 +22,7 @@ import { PreventLoggedInAccessGuard } from './services/auth/preventLoggedInAcces
 import { UsersService } from './services/users.service';
 import { AuthAdminGuard } from './services/auth/auth.admin.guard';
 import { AdminUsersService } from './services/admin/admin.users.service';
+import { AdminRecipesService } from './services/admin/admin.recipes.service';
 
 export function storageFactory(): OAuthStorage {
   return localStorage;
@@ -43,6 +44,7 @@ export function storageFactory(): OAuthStorage {
     PreventLoggedInAccessGuard,
     UsersService,
     AdminUsersService,
+    AdminRecipesService,
   ],
 })
 export class CoreModule {

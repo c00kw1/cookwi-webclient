@@ -1,5 +1,5 @@
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -16,18 +16,38 @@ import { FooterComponent } from './components/footer/footer.component';
 import { TimePipe } from './pipes/time.pipe';
 import { SimpleDialogComponent } from './components/simple-dialog/simple-dialog.component';
 import { OrderByPipe } from './pipes/order-by.pipe';
+import { EnumToArrayPipe } from './pipes/enum-to-array.pipe';
 
 @NgModule({
-    declarations: [TopbarComponent, RecipesSearchPipe, TagsFilterPipe, FooterComponent, TimePipe, SimpleDialogComponent, OrderByPipe],
-    imports: [
-        CommonModule, RouterModule, FlexLayoutModule,
-        MatToolbarModule, MatIconModule, MatButtonModule,
-        MatMenuModule, MatDialogModule
-    ],
-    exports: [
-        TopbarComponent, RecipesSearchPipe, TagsFilterPipe,
-        FooterComponent, TimePipe, SimpleDialogComponent,
-        OrderByPipe
-    ]
+  declarations: [
+    TopbarComponent,
+    RecipesSearchPipe,
+    TagsFilterPipe,
+    FooterComponent,
+    TimePipe,
+    SimpleDialogComponent,
+    OrderByPipe,
+    EnumToArrayPipe,
+  ],
+  imports: [
+    CommonModule,
+    RouterModule,
+    FlexLayoutModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatDialogModule,
+  ],
+  exports: [
+    TopbarComponent,
+    RecipesSearchPipe,
+    TagsFilterPipe,
+    FooterComponent,
+    TimePipe,
+    SimpleDialogComponent,
+    OrderByPipe,
+    EnumToArrayPipe,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}
