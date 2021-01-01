@@ -78,65 +78,7 @@
           | tagsFilter: selectedTags
       "
     >
-      <mat-card class="recipe-card">
-        <img
-          class="recipe-img"
-          mat-card-image
-          src="{{ recipe.imagePath || noImagePath }}"
-          [routerLink]="['/recipes/view/', recipe.id]"
-        />
-        <mat-card-header>
-          <mat-card-title>{{ recipe.title }}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>
-            {{ recipe.description }}
-          </p>
-          <mat-chip-list aria-label="Tags">
-            <mat-chip *ngFor="let tag of recipe.tags">{{ tag }}</mat-chip>
-          </mat-chip-list>
-
-          <div style="padding-top: 20px">
-            <div fxLayout="row" fxLayoutGap="5px">
-              <div fxFlex="50">
-                <div
-                  fxLayout="row"
-                  fxLayoutAlign="start center"
-                  matTooltip="Temps de préparation"
-                >
-                  <mat-icon fxFlex="0 0 30px" style="padding-right: 5px"
-                    >room_service</mat-icon
-                  >
-                  <div fxFlex>{{ recipe.cookingTime | time }}</div>
-                </div>
-              </div>
-              <div fxFlex="50">
-                <div
-                  fxLayout="row"
-                  fxLayoutAlign="start center"
-                  matTooltip="Temps de cuisson"
-                >
-                  <mat-icon fxFlex="0 0 30px" style="padding-right: 5px"
-                    >outdoor_grill</mat-icon
-                  >
-                  <div fxFlex>{{ recipe.bakingTime | time }}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </mat-card-content>
-        <mat-card-actions>
-          <a
-            class="card-action-button"
-            mat-button
-            color="primary"
-            [routerLink]="['/recipes/view/', recipe.id]"
-          >
-            Voir
-            <mat-icon class="card-action-button-icon">navigate_next</mat-icon>
-          </a>
-        </mat-card-actions>
-      </mat-card>
+      <app-recipe-card [recipe]="recipe"></app-recipe-card>
     </div>
   </div>
 </div>

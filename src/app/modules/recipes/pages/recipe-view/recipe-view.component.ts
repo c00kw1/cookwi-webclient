@@ -45,8 +45,8 @@ export class RecipeViewComponent implements OnInit {
             title: 'Oups ...',
             message:
               'Une erreur est survenue pendant le chargement de la recette.',
-            closeButton: 'Retour',
-            closeButtonIcon: 'undo',
+            cancelButton: 'Retour',
+            cancelButtonIcon: 'undo',
           });
           dialog.afterClosed().subscribe((r) => {
             this._router.navigate(['recipes/list']);

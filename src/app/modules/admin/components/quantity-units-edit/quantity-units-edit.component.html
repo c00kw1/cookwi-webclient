@@ -1,0 +1,36 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <h2 mat-dialog-title>Add a unit</h2>
+  <div fxLayout="row wrap" fxLayoutGap="20px grid">
+    <mat-form-field class="input" appearance="outline">
+      <mat-label>Name</mat-label>
+      <mat-hint>ex: Centiliter</mat-hint>
+      <mat-icon matSuffix color="primary">label</mat-icon>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+    <mat-form-field class="input" appearance="outline">
+      <mat-label>Acronym</mat-label>
+      <mat-hint>ex: cl for centiliter</mat-hint>
+      <mat-icon matSuffix color="primary">label</mat-icon>
+      <input matInput formControlName="acronym" />
+    </mat-form-field>
+    <mat-form-field class="input" appearance="outline">
+      <mat-label>Type</mat-label>
+      <mat-hint>ex: Liquid</mat-hint>
+      <mat-select formControlName="type">
+        <mat-option
+          *ngFor="let type of allTypes | enumToArray"
+          [value]="allTypes[type.index]"
+        >
+          {{ type.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button type="submit" *ngIf="!showSpin">
+      {{ editMode ? "Update" : "Add " }}
+    </button>
+    <mat-spinner diameter="20" *ngIf="showSpin"></mat-spinner>
+  </mat-dialog-actions>
+</form>

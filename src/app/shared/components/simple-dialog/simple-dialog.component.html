@@ -1,9 +1,19 @@
-
-<h1 mat-dialog-title>{{data.title}}</h1>
-<div mat-dialog-content>{{data.message}}</div>
+<h1 mat-dialog-title>{{ data.title }}</h1>
+<div mat-dialog-content>{{ data.message }}</div>
 <div mat-dialog-actions>
-  <button mat-button mat-dialog-close>
-      <mat-icon *ngIf="data.closeButtonIcon !== ''">{{data.closeButtonIcon}}</mat-icon>
-      {{data.closeButton}}
-    </button>
+  <!-- NO / CANCEL -->
+  <button mat-button (click)="close(false)">
+    <mat-icon *ngIf="data.cancelButtonIcon && data.cancelButtonIcon !== ''">{{
+      data.cancelButtonIcon
+    }}</mat-icon>
+    {{ data.cancelButton }}
+  </button>
+  <!-- YES -->
+  <button mat-button (click)="close(true)" *ngIf="data.validateButton">
+    <mat-icon
+      *ngIf="data.validateButtonIcon && data.validateButtonIcon !== ''"
+      >{{ data.validateButtonIcon }}</mat-icon
+    >
+    {{ data.validateButton }}
+  </button>
 </div>

@@ -4,6 +4,16 @@
 
 <div class="page-container">
   <mat-tab-group color="accent">
+    <mat-tab label="quantity-units">
+      <ng-template mat-tab-label>
+        <mat-icon style="margin-right: 10px">square_foot</mat-icon>
+        Quantity units
+      </ng-template>
+      <div class="tab-content">
+        <app-quantity-units-list></app-quantity-units-list>
+      </div>
+    </mat-tab>
+
     <mat-tab label="Users">
       <ng-template mat-tab-label>
         <mat-icon style="margin-right: 10px">people_outline</mat-icon>
@@ -16,8 +26,5 @@
         </button>
       </div>
     </mat-tab>
-
-    <mat-tab label="Empty"> Content 2 </mat-tab>
-    <mat-tab label="Empty"> Content 3 </mat-tab>
   </mat-tab-group>
 </div>

@@ -12,7 +12,6 @@ import {
 } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { startWith, map } from 'rxjs/operators';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Recipe } from 'src/app/shared/models/recipe.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -24,6 +23,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { SimpleDialogComponent } from 'src/app/shared/components/simple-dialog/simple-dialog.component';
 import * as _ from 'lodash';
 import { QuantityUnit } from 'src/app/shared/models/quantityunit.model';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-recipes-edit',
@@ -96,6 +96,17 @@ export class RecipesEditComponent implements OnInit {
     // gather all quantity units
     this._recipesService.getAllQuantityUnits().subscribe((res) => {
       this.quantityUnits = res;
+    });
+
+    // gather all available tags
+    this._recipesService.getAllTags().subscribe((res) => {
+      this.allTags = res;
+      this.filteredTags = this.tagCtrl.valueChanges.pipe(
+        startWith(null),
+        map((tag: string | null) => {
+          return tag ? this._filter(tag) : this.allTags.slice();
+        })
+      );
     });
   }
 
@@ -246,6 +257,11 @@ export class RecipesEditComponent implements OnInit {
     }
   }
 
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.allTags.filter((tag) => tag.includes(filterValue));
+  }
+
   //#endregion
 
   //#region Ingredients
@@ -257,7 +273,20 @@ export class RecipesEditComponent implements OnInit {
   }
 
   delete_ingredient(index: number) {
-    this.recipe.ingredients.splice(index, 1);
+    this._dialog
+      .open(SimpleDialogComponent, {
+        data: {
+          title: 'Confirmation',
+          message: "Souhaitez-vous supprimer l'ingrédient ?",
+          validateButton: 'Confirmer',
+        },
+      })
+      .afterClosed()
+      .subscribe((res) => {
+        if (res) {
+          this.recipe.ingredients.splice(index, 1);
+        }
+      });
   }
 
   //#endregion
@@ -277,7 +306,20 @@ export class RecipesEditComponent implements OnInit {
   }
 
   delete_step(index: number) {
-    this.recipe.steps.splice(index, 1);
+    this._dialog
+      .open(SimpleDialogComponent, {
+        data: {
+          title: 'Confirmation',
+          message: "Souhaitez-vous supprimer l'étape ?",
+          validateButton: 'Confirmer',
+        },
+      })
+      .afterClosed()
+      .subscribe((res) => {
+        if (res) {
+          this.recipe.steps.splice(index, 1);
+        }
+      });
   }
 
   //#endregion

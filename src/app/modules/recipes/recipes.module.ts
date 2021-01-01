@@ -22,6 +22,7 @@ import { RecipesEditComponent } from './pages/recipes-edit/recipes-edit.componen
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RecipeViewComponent } from './pages/recipe-view/recipe-view.component';
+import { RecipeCardComponent } from './components/recipe-card/recipe-card.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { RecipeViewComponent } from './pages/recipe-view/recipe-view.component';
     RecipesGridComponent,
     RecipesEditComponent,
     RecipeViewComponent,
+    RecipeCardComponent,
   ],
   imports: [
     CommonModule,
