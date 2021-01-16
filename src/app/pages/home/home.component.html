@@ -8,11 +8,12 @@
             <mat-card-title>Bienvenue sur Cookwi</mat-card-title>
             <mat-card-content>
                 <p>
-                    Cookwi est le livre de recettes digital, pour toute la tribue. Du poussin tout juste sorti de la coquille, jusqu'au chef toqué !
+                    Cookwi est le livre de recettes digital, pour toute la tribu. 
+                    <br> 
+                    Du poussin tout juste sorti de la coquille, jusqu'au chef toqué !
                 </p>
                 <p>
-                    Retrouvez en un clic votre recette favorite de quiche, votre craquage sucré ou la pièce montée d'antan de
-                    votre Mamie Arlette.
+                    Retrouvez en un clic votre recette favorite de quiche, votre craquage sucré ou la pièce montée d'antan de Mamie Arlette.
                 </p>
                 <!-- NOT CONNECTED -->
                 <div *ngIf="!(authService.isAuthenticated$ | async)" class="card-buttons" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="20px grid" fxLayoutAlign="center">
@@ -40,7 +41,7 @@
                     <div fxFlex="0 1 calc(36% - 20px)" fxFlex.lt-lg="0 1 calc(50% -20px)" fxFlex.lt-sm="100">
                         <button mat-flat-button  color="accent" [routerLink]="['/profile']">
                             <mat-icon>account_circle</mat-icon>
-                            Mon profile
+                            Mon profil
                         </button>
                     </div>
                 </div>
