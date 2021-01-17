@@ -1,3 +1,4 @@
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { BrowserModule } from '@angular/platform-browser';
@@ -23,6 +24,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
+import { LegalComponent } from './pages/legal/legal.component';
+import { ContactComponent } from './pages/contact/contact.component';
+import { MatDividerModule } from '@angular/material/divider';
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -33,6 +37,8 @@ registerLocaleData(localeFr);
     NotFoundComponent,
     ShouldLoginComponent,
     LoginComponent,
+    LegalComponent,
+    ContactComponent,
   ],
   imports: [
     CoreModule.forRoot(),
@@ -52,6 +58,8 @@ registerLocaleData(localeFr);
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    MatExpansionModule,
+    MatDividerModule,
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
   bootstrap: [AppComponent],

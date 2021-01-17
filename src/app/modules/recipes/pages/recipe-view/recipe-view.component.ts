@@ -9,6 +9,7 @@ import {
 } from 'src/app/shared/components/simple-dialog/simple-dialog.component';
 import { Observable } from 'rxjs';
 import * as _ from 'lodash';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-recipe-view',
@@ -27,7 +28,8 @@ export class RecipeViewComponent implements OnInit {
     private _route: ActivatedRoute,
     private _service: RecipesService,
     private _router: Router,
-    private _dialog: MatDialog
+    private _dialog: MatDialog,
+    private _snackBar: MatSnackBar
   ) {
     this.loading = true;
   }
@@ -54,6 +56,39 @@ export class RecipeViewComponent implements OnInit {
         }
       );
     });
+  }
+
+  deleteRecipe(): void {
+    this._dialog
+      .open(SimpleDialogComponent, {
+        data: {
+          title: 'Confirmation',
+          message: 'Souhaitez-vous supprimer la recette (définitif) ?',
+          validateButton: 'Confirmer',
+        },
+      })
+      .afterClosed()
+      .subscribe((res) => {
+        if (res) {
+          this._service.removeOne(this.recipe.id).subscribe(
+            (res) => {
+              this._router.navigate(['recipes/list']);
+              this._snackBar.open('Recette supprimée !', 'Fermer', {
+                duration: 5_000,
+              });
+            },
+            (error) => {
+              this._snackBar.open(
+                'Une erreur est survenue durant la suppression',
+                'Fermer',
+                {
+                  duration: 5_000,
+                }
+              );
+            }
+          );
+        }
+      });
   }
 
   openDialog(data: SimpleDialogData): MatDialogRef<SimpleDialogComponent, any> {

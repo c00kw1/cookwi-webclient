@@ -1,25 +1,25 @@
 .topbar {
-    position: relative;
-    z-index: 2;
+  position: relative;
+  z-index: 2;
 
-    .title {
-        flex: 0 0 auto;
-        display: inline-flex;
-        height: inherit;
-        align-items: center;
-        cursor: pointer;
+  .title {
+    flex: 0 0 auto;
+    display: inline-flex;
+    height: inherit;
+    align-items: center;
+    cursor: pointer;
 
-        @media screen and (max-width: 959px) {
-            margin: auto;
-        }
-
-        img {
-            display: inline;
-            max-height: 100%;
-        }
+    @media screen and (max-width: 959px) {
+      margin: auto;
     }
 
-    .spacer {
-        flex: 1 1 auto;
+    img {
+      display: inline;
+      max-height: 100%;
     }
+  }
+
+  .spacer {
+    flex: 1 1 auto;
+  }
 }

@@ -72,7 +72,11 @@ export class RecipesEditComponent implements OnInit {
       // we are in edit mode, not create
       this._recipesService.getOne(id).subscribe(
         (res) => {
-          this.defaultImage = res.imagePath ?? this.defaultImage;
+          // we change (or not ?) the image to show
+          this.defaultImage =
+            res.imagePath && res.imagePath !== ''
+              ? res.imagePath
+              : this.defaultImage;
           this.resetForm(res);
         },
         (err) => {

@@ -40,6 +40,10 @@ export class RecipesService {
     });
   }
 
+  removeOne(id: string): Observable<void> {
+    return this.http.delete<void>(this.api + `/${id}`, { headers: headers });
+  }
+
   sendImage(image: File, recipeId: string): Observable<void> {
     let uploadData = new FormData();
     uploadData.append('file', image, image.name);
