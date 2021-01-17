@@ -8,11 +8,13 @@ import { PreventLoggedInAccessGuard } from './core/services/auth/preventLoggedIn
 import { LoginComponent } from './pages/login/login.component';
 import { LegalComponent } from './pages/legal/legal.component';
 import { ContactComponent } from './pages/contact/contact.component';
+import { HistoryComponent } from './pages/history/history.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'legal', component: LegalComponent },
+  { path: 'history', component: HistoryComponent },
   { path: 'contact', component: ContactComponent },
   {
     path: 'register/:id',

@@ -27,6 +27,7 @@ import { registerLocaleData } from '@angular/common';
 import { LegalComponent } from './pages/legal/legal.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { MatDividerModule } from '@angular/material/divider';
+import { HistoryComponent } from './pages/history/history.component';
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -38,6 +39,7 @@ registerLocaleData(localeFr);
     ShouldLoginComponent,
     LoginComponent,
     LegalComponent,
+    HistoryComponent,
     ContactComponent,
   ],
   imports: [
