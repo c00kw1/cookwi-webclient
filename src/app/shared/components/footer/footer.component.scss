@@ -1,18 +1,23 @@
-@import '../../../../variables.scss';
+@import "../../../../variables.scss";
 
 .footer-container {
-    z-index: 9999;
+  z-index: 9999;
 }
 
 .footer-subcontainer {
-    margin-bottom: 0;
-    padding : 30px;
-    color: white;
-    font-size: 12px;
+  margin-bottom: 0;
+  padding: 30px;
+  color: white;
+  font-size: 12px;
 }
 
 .copyright {
-    padding-left: 30px;
+  padding-left: 30px;
+  color: white;
+  font-size: 12px;
+  a {
+    font-weight: 0;
+    text-decoration: underline;
     color: white;
-    font-size: 12px;
+  }
 }

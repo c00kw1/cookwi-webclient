@@ -1,0 +1,14 @@
+.outer-container {
+  background-image: url("/assets/splash/burrito.jpg");
+  height: calc(100% - 80px); // title takes place
+}
+
+.contact-container {
+  padding-top: 30px;
+  width: 30%;
+}
+
+.input {
+  width: 100%;
+  font-size: 15px;
+}
