@@ -19,7 +19,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class RecipeViewComponent implements OnInit {
   public lodash = _;
   public loading: boolean;
-  public defaultImage: string = '/assets/no-image.jpg';
+  public defaultImage: string = 'assets/no-image.jpg';
 
   private recipe$: Observable<Recipe>;
   public recipe: Recipe;

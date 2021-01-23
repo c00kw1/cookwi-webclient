@@ -4,33 +4,37 @@
     <mat-toolbar-row fxShow="true" fxHide.gt-sm="true">
       <!-- LEFT MENU -->
       <button mat-icon-button [matMenuTriggerFor]="leftMenu">
-          <mat-icon>menu</mat-icon>
+        <mat-icon>menu</mat-icon>
       </button>
       <mat-menu #leftMenu="matMenu">
-          <!-- connected -->
-          <button mat-menu-item *ngIf="isLoggedIn | async" [routerLink]="['/recipes/list']">
-              <mat-icon>menu_book</mat-icon>
-              Mes recettes
-          </button>
-          <!-- not connected -->
-          <button mat-menu-item *ngIf="!(isLoggedIn | async)">
-              <mat-icon>assignment</mat-icon>
-              M'inscrire
-          </button>
-          <!-- whatever -->
-          <button mat-menu-item [routerLink]="['/history']">
-              <mat-icon>contact_support</mat-icon>
-              Histoire d'oeuf
-          </button>
-          <button mat-menu-item [routerLink]="['/contact']">
-              <mat-icon>alternate_email</mat-icon>
-              Contact
-          </button>
+        <!-- connected -->
+        <button
+          mat-menu-item
+          *ngIf="isLoggedIn | async"
+          [routerLink]="['/recipes/list']"
+        >
+          <mat-icon>menu_book</mat-icon>
+          Mes recettes
+        </button>
+        <!-- not connected -->
+        <button mat-menu-item *ngIf="!(isLoggedIn | async)">
+          <mat-icon>assignment</mat-icon>
+          M'inscrire
+        </button>
+        <!-- whatever -->
+        <button mat-menu-item [routerLink]="['/history']">
+          <mat-icon>contact_support</mat-icon>
+          Histoire d'oeuf
+        </button>
+        <button mat-menu-item [routerLink]="['/contact']">
+          <mat-icon>alternate_email</mat-icon>
+          Contact
+        </button>
       </mat-menu>
 
       <!-- TITLE -->
       <span class="title" [routerLink]="['/home']">
-        <img src="/assets/logo2.png" alt="Cookwi logo" />
+        <img src="assets/logo2.png" alt="Cookwi logo" />
         &nbsp;&nbsp;Cookwi
       </span>
 
@@ -73,7 +77,7 @@
     <mat-toolbar-row fxShow="true" fxHide.lt-md="true">
       <!-- TITLE -->
       <span class="title" [routerLink]="['/home']" style="margin-right: 50px">
-        <img src="/assets/logo2.png" alt="Cookwi logo" />
+        <img src="assets/logo2.png" alt="Cookwi logo" />
         &nbsp;&nbsp;Cookwi
       </span>
 
@@ -85,9 +89,7 @@
       <!-- not connected -->
       <a mat-button *ngIf="!(isLoggedIn | async)"> M'inscrire </a>
       <!-- whatever -->
-      <a mat-button [routerLink]="['/history']">
-        Histoire d'oeuf
-      </a>
+      <a mat-button [routerLink]="['/history']"> Histoire d'oeuf </a>
       <a mat-button [routerLink]="['/contact']"> Contact </a>
       <a mat-button color="accent" [routerLink]="['/contact', { type: 'bug' }]">
         <mat-icon>bug_report</mat-icon>

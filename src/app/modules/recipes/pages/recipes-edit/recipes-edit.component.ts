@@ -33,7 +33,7 @@ import { map, startWith } from 'rxjs/operators';
 export class RecipesEditComponent implements OnInit {
   public image: string | ArrayBuffer = '';
   public imageFile: File;
-  public defaultImage: string = '/assets/no-image.jpg';
+  public defaultImage: string = 'assets/no-image.jpg';
 
   public recipe: Recipe;
   public form: FormGroup;

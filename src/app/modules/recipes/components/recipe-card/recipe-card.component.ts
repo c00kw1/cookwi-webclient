@@ -8,7 +8,7 @@ import { Recipe } from 'src/app/shared/models/recipe.model';
 })
 export class RecipeCardComponent implements OnInit {
   @Input() recipe: Recipe;
-  public noImagePath: string = '/assets/no-image.jpg';
+  public noImagePath: string = 'assets/no-image.jpg';
 
   constructor() {}
 
