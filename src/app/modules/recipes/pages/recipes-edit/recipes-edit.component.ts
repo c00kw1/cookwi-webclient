@@ -162,9 +162,20 @@ export class RecipesEditComponent implements OnInit {
       (res) => {
         // once the recipe is posted, we need to upload the image, if needed
         if (this.imageFile) {
-          this._recipesService
-            .sendImage(this.imageFile, res.id)
-            .subscribe((r) => this.afterRecipeSent(res.id));
+          this._recipesService.sendImage(this.imageFile, res.id).subscribe(
+            (r) => this.afterRecipeSent(res.id),
+            (e) => {
+              this.showSpin = false;
+              this._snackBar.open(
+                "Recette enregistrée mais nous avons eu un problème avec l'image",
+                'Fermer',
+                {
+                  duration: 8_000,
+                }
+              );
+            }
+          );
+          this.ngOnInit();
         } else {
           this.afterRecipeSent(res.id);
         }
