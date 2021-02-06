@@ -23,6 +23,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RecipeViewComponent } from './pages/recipe-view/recipe-view.component';
 import { RecipeCardComponent } from './components/recipe-card/recipe-card.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { RecipeCardComponent } from './components/recipe-card/recipe-card.compon
     MatTooltipModule,
     MatProgressSpinnerModule,
     SharedModule,
+    MatMenuModule,
   ],
 })
 export class RecipesModule {}

@@ -1,8 +1,12 @@
 .search-container {
   margin-top: 20px;
+  margin-bottom: 35px;
   .search-input {
     width: 100%;
     font-size: 25px;
+  }
+  ::ng-deep .mat-form-field-wrapper {
+    margin-bottom: -1.25em;
   }
 }
 
