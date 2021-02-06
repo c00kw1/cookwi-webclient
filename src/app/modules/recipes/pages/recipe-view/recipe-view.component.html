@@ -1,5 +1,5 @@
 <div class="page-title mat-elevation-z0">
-  <h1 *ngIf="!loading">Ma recette : {{ recipe.title }}</h1>
+  <h1 *ngIf="!loading">{{ recipe.title }}</h1>
   <h1 *ngIf="loading">Loading ...</h1>
 </div>
 
@@ -15,32 +15,35 @@
       />
       <div class="recipe-img-back">
         <button
-          type="button"
-          mat-raised-button
+          mat-mini-fab
+          color="basic"
           [routerLink]="['/recipes/list']"
+          matTooltip="Retour à la liste"
         >
           <mat-icon>keyboard_backspace</mat-icon>
-          Retour à la liste
         </button>
       </div>
       <div class="recipe-img-update">
         <button
-          type="button"
-          mat-raised-button
-          [routerLink]="['/recipes/edit/', recipe.id]"
+          mat-mini-fab
+          color="basic"
+          aria-label="Actions"
+          matTooltip="Actions"
+          [matMenuTriggerFor]="menu"
         >
-          <mat-icon>edit</mat-icon>
-          Modifier
+          <mat-icon>more_vert</mat-icon>
         </button>
-        <button
-          type="button"
-          color="warn"
-          mat-icon-button
-          (click)="deleteRecipe()"
-          class="delete-button"
-        >
-          <mat-icon>delete</mat-icon>
-        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item [routerLink]="['/recipes/edit/', recipe.id]">
+            <mat-icon>edit</mat-icon>
+            Modifier
+          </button>
+          <button mat-menu-item color="warn" (click)="deleteRecipe()">
+            <mat-icon>delete</mat-icon>
+            Supprimer
+          </button>
+        </mat-menu>
+        <!--  -->
       </div>
       <div class="recipe-img-timings mat-elevation-z4">
         <div
