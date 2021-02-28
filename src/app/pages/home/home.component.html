@@ -10,16 +10,14 @@
           <img src="assets/pages/home.png" />
         </div>
         <div fxFlex fxFlexAlign="center">
-          <mat-card-title i18n="home_title"
-            >Bienvenue sur cookwi</mat-card-title
-          >
+          <mat-card-title>Bienvenue sur cookwi</mat-card-title>
           <mat-card-content>
-            <p i18n="home_1st_p">
+            <p>
               Cookwi est le livre de recettes digital, pour toute la tribu.
               <br />
               Du poussin tout juste sorti de la coquille, jusqu'au chef toqué !
             </p>
-            <p i18n="home_2nd_p">
+            <p>
               Retrouvez en un clic votre recette favorite de quiche, votre
               craquage sucré ou la pièce montée d'antan de Mamie Arlette.
             </p>
@@ -37,7 +35,11 @@
                 fxFlex.lt-lg="0 1 calc(50% -20px)"
                 fxFlex.lt-sm="100"
               >
-                <button mat-stroked-button color="primary">
+                <button
+                  mat-stroked-button
+                  color="primary"
+                  [routerLink]="['/contact', { type: 'access' }]"
+                >
                   <mat-icon>sentiment_satisfied_alt</mat-icon>
                   Je veux essayer
                 </button>

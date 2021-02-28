@@ -17,9 +17,13 @@
           Mes recettes
         </button>
         <!-- not connected -->
-        <button mat-menu-item *ngIf="!(isLoggedIn | async)">
+        <button
+          mat-menu-item
+          *ngIf="!(isLoggedIn | async)"
+          [routerLink]="['/contact', { type: 'access' }]"
+        >
           <mat-icon>assignment</mat-icon>
-          M'inscrire
+          Demander un accès
         </button>
         <!-- whatever -->
         <button mat-menu-item [routerLink]="['/history']">
@@ -87,7 +91,13 @@
         Mes recettes
       </a>
       <!-- not connected -->
-      <a mat-button *ngIf="!(isLoggedIn | async)"> M'inscrire </a>
+      <a
+        mat-button
+        *ngIf="!(isLoggedIn | async)"
+        [routerLink]="['/contact', { type: 'access' }]"
+      >
+        Demander un accès
+      </a>
       <!-- whatever -->
       <a mat-button [routerLink]="['/history']"> Histoire d'oeuf </a>
       <a mat-button [routerLink]="['/contact']"> Contact </a>

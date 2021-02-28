@@ -5,7 +5,7 @@
 <div class="outer-container">
   <div class="page-container contact-container">
     <mat-card class="mat-elevation-z4">
-      <mat-card-content>
+      <mat-card-content *ngIf="!messageSentView">
         <p>
           Vous avez une question ? Une suggestion ou simplement un mot doux ?
           N'hésitez pas c'est par ici.
@@ -14,27 +14,45 @@
           Nous vous répondrons dans les délais les plus brefs possible c'est
           promis.
         </p>
-        <form>
+        <form [formGroup]="contactFrom" (ngSubmit)="submit()">
           <mat-form-field class="input" appearance="outline">
             <mat-label>Votre adresse mail</mat-label>
-            <input matInput />
+            <input matInput type="email" formControlName="email" />
             <mat-icon matSuffix>alternate_email</mat-icon>
           </mat-form-field>
           <mat-form-field class="input" appearance="outline">
-            <mat-label>Objet de votre message</mat-label>
-            <input matInput />
-            <mat-icon matSuffix>title</mat-icon>
+            <mat-label>Sujet de la demande</mat-label>
+            <mat-select formControlName="type">
+              <mat-option *ngFor="let type of types" [value]="type.type">{{
+                type.name
+              }}</mat-option>
+            </mat-select>
+            <mat-icon matSuffix>bookmark_border</mat-icon>
           </mat-form-field>
-          <mat-form-field class="input" appearance="outline">
+          <mat-form-field
+            class="input"
+            appearance="outline"
+            *ngIf="contactFrom.value.type !== 'access'"
+          >
             <mat-label>Votre message</mat-label>
-            <textarea matInput rows="6"></textarea>
+            <textarea matInput rows="6" formControlName="message"></textarea>
           </mat-form-field>
           <div style="text-align: right">
-            <button mat-fab color="primary" aria-label="Envoyer le message">
+            <button
+              mat-fab
+              color="primary"
+              aria-label="Envoyer le message"
+              type="submit"
+              [disabled]="!contactFrom.valid"
+            >
               <mat-icon>send</mat-icon>
             </button>
           </div>
         </form>
+      </mat-card-content>
+      <mat-card-content *ngIf="messageSentView">
+        <p>Message envoyé avec succès, merci beaucoup !</p>
+        <p>Nous revenons vers vous dès que possible.</p>
       </mat-card-content>
     </mat-card>
   </div>

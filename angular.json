@@ -34,8 +34,7 @@
               "src/styles.scss",
               "src/assets/fonts/material-icons/material-icons.css"
             ],
-            "scripts": [],
-            "localize": ["fr"]
+            "scripts": []
           },
           "configurations": {
             "homologation": {
@@ -46,7 +45,7 @@
                 }
               ],
               "outputPath": "./dist",
-              "localize": true,
+              "localize": false,
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -75,7 +74,7 @@
                 }
               ],
               "outputPath": "./dist",
-              "localize": true,
+              "localize": false,
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -95,9 +94,6 @@
                   "maximumError": "10kb"
                 }
               ]
-            },
-            "en": {
-              "localize": ["en"]
             }
           }
         },
@@ -113,12 +109,6 @@
             "en": {
               "browserTarget": "cookwi-webclient:build:en"
             }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "cookwi-webclient:build"
           }
         },
         "test": {
@@ -155,12 +145,6 @@
               "devServerTarget": "cookwi-webclient:serve:production"
             }
           }
-        }
-      },
-      "i18n": {
-        "sourceLocale": "fr",
-        "locales": {
-          "en": "src/locale/messages.en.xlf"
         }
       }
     }

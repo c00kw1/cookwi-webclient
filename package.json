@@ -9,8 +9,7 @@
     "build:ci:prod": "ng build --configuration=production",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "i18n": "ng extract-i18n --output-path src/locale"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
@@ -28,6 +27,7 @@
     "@angular/router": "~11.0.5",
     "angular-oauth2-oidc": "^10.0.3",
     "lodash": "^4.17.20",
+    "ng-recaptcha": "^7.0.1",
     "rxjs": "~6.5.4",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

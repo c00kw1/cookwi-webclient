@@ -1,8 +1,11 @@
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import {
+  RecaptchaV3Module,
+  RecaptchaFormsModule,
+  RECAPTCHA_V3_SITE_KEY,
+} from 'ng-recaptcha';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,6 +20,8 @@ import { TimePipe } from './pipes/time.pipe';
 import { SimpleDialogComponent } from './components/simple-dialog/simple-dialog.component';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { EnumToArrayPipe } from './pipes/enum-to-array.pipe';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
 @NgModule({
   declarations: [
@@ -38,6 +43,8 @@ import { EnumToArrayPipe } from './pipes/enum-to-array.pipe';
     MatButtonModule,
     MatMenuModule,
     MatDialogModule,
+    RecaptchaV3Module,
+    RecaptchaFormsModule,
   ],
   exports: [
     TopbarComponent,
@@ -48,6 +55,12 @@ import { EnumToArrayPipe } from './pipes/enum-to-array.pipe';
     SimpleDialogComponent,
     OrderByPipe,
     EnumToArrayPipe,
+  ],
+  providers: [
+    {
+      provide: RECAPTCHA_V3_SITE_KEY,
+      useValue: '6Ldli2oaAAAAAPBY5lZqe2P2uVg2DEuIoh1_M5y0',
+    },
   ],
 })
 export class SharedModule {}

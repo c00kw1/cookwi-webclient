@@ -1,6 +1,23 @@
 .legal-container {
   margin-top: 30px;
   width: 50%;
+  @media screen and (max-width: 1919px) {
+    width: 600% !important;
+    padding-top: 50px;
+  }
+  @media screen and (max-width: 1279px) {
+    width: 70% !important;
+    padding-top: 40px;
+  }
+  @media screen and (max-width: 959px) {
+    width: 80% !important;
+    padding-top: 30px;
+  }
+  @media screen and (max-width: 599px) {
+    width: 90% !important;
+    padding-top: 20px;
+  }
+
   .last-update {
     font-size: 14px;
     color: gray;

@@ -117,6 +117,8 @@ export class RecipesEditComponent implements OnInit {
   resetForm(recipe: Partial<Recipe> = {}): void {
     this.recipe = new Recipe(recipe);
     this.recipe.steps = _.orderBy(this.recipe.steps, 'position');
+    if (this.recipe.ingredients.length === 0) this.add_ingredient();
+    if (this.recipe.steps.length === 0) this.add_step(0);
     this.form = this._formBuilder.group({
       title: [this.recipe.title, Validators.required],
       description: [this.recipe.description, Validators.required],
@@ -167,7 +169,7 @@ export class RecipesEditComponent implements OnInit {
             (e) => {
               this.showSpin = false;
               this._snackBar.open(
-                "Recette enregistrée mais nous avons eu un problème avec l'image",
+                "Recette enregistrée mais nous avons rencontré un problème avec l'image",
                 'Fermer',
                 {
                   duration: 8_000,
