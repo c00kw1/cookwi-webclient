@@ -1,0 +1,55 @@
+.legal-container {
+  margin-top: 30px;
+  width: 50%;
+  @media screen and (max-width: 1919px) {
+    width: 600% !important;
+    padding-top: 50px;
+  }
+  @media screen and (max-width: 1279px) {
+    width: 70% !important;
+    padding-top: 40px;
+  }
+  @media screen and (max-width: 959px) {
+    width: 80% !important;
+    padding-top: 30px;
+  }
+  @media screen and (max-width: 599px) {
+    width: 90% !important;
+    padding-top: 20px;
+  }
+
+  .last-update {
+    font-size: 14px;
+    color: gray;
+  }
+  .intro {
+    padding: 10px;
+  }
+}
+
+.level1 {
+  mat-panel-title {
+    font-size: 18px;
+  }
+}
+
+.level2 {
+  mat-panel-title {
+    font-size: 14px;
+    font-weight: 500;
+  }
+}
+
+.headers-align .mat-expansion-panel-header-title,
+.headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headers-align .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}

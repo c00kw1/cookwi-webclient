@@ -20,7 +20,7 @@ export class AuthGuard implements CanActivate {
     ): Observable<boolean> {
         return this.authService.isDoneLoading$
             .pipe(filter(isDone => isDone))
-            .pipe(tap(_ => this.isAuthenticated || this.authService.login(state.url)))
+            .pipe(tap(_ => this.isAuthenticated || this.authService.login()))
             .pipe(map(_ => this.isAuthenticated));
     }
 }

@@ -6,5 +6,6 @@ $app-warn:    mat-palette($mat-red);
 
 $primary: mat-color($app-primary);
 $primary-light: mat-color($app-primary, 700);
+$primary-verylight: mat-color($app-primary, 300);
 $accent: mat-color($app-accent);
 $warn: mat-color($app-warn);

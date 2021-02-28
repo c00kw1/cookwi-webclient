@@ -1,0 +1,322 @@
+<div class="page-title mat-elevation-z0">
+  <h1>{{ editMode ? "Modifier" : "Créer" }} une recette</h1>
+</div>
+<div class="page-container create-container">
+  <mat-card class="mat-elevation-z4">
+    <div class="recipe-photo-area">
+      <img
+        class="recipe-img"
+        mat-card-image
+        [src]="image || defaultImage"
+      />
+      <div class="recipe-img-upload">
+        <button type="button" mat-raised-button (click)="fileInput.click()">
+          <mat-icon>insert_photo</mat-icon>
+          Image
+        </button>
+        <input
+          hidden
+          (change)="onImageAdded($event)"
+          #fileInput
+          type="file"
+          id="file"
+        />
+      </div>
+    </div>
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-section">
+          <span class="section">
+            <span class="section-title">
+              <mat-icon>assignment</mat-icon>
+              <h3>Informations générales</h3>
+            </span>
+            <span class="section-subtitle">
+              Les informations décrivant au mieux votre recette ! **MIAM** On en
+              salive d'avance.
+            </span>
+          </span>
+          <mat-form-field class="input" appearance="outline">
+            <mat-label>Titre</mat-label>
+            <mat-icon matSuffix color="primary">title</mat-icon>
+            <input matInput formControlName="title" />
+          </mat-form-field>
+          <br />
+          <mat-form-field class="input" appearance="outline">
+            <mat-label>Description</mat-label>
+            <mat-icon matSuffix color="primary">subtitles</mat-icon>
+            <textarea
+              matInput
+              matTextareaAutosize
+              matAutosizeMinRows="2"
+              formControlName="description"
+            ></textarea>
+          </mat-form-field>
+          <div fxLayout="row wrap" fxLayoutGap="10px grid">
+            <div
+              fxFlex="0 0 150px"
+              fxFlex.lt-sm="calc(50% - 10px - 25px)"
+              fxFlexAlign="center"
+            >
+              <mat-form-field class="input" appearance="outline">
+                <mat-label>Préparation</mat-label>
+                <mat-icon matSuffix color="primary">room_service</mat-icon>
+                <input matInput type="time" formControlName="cookingTime" />
+                <mat-hint>Heures:Minutes</mat-hint>
+              </mat-form-field>
+            </div>
+            <div
+              fxFlex="0 0 150px"
+              fxFlex.lt-sm="calc(50% - 10px - 25px)"
+              fxFlexAlign="center"
+            >
+              <mat-form-field class="input" appearance="outline">
+                <mat-label>Cuisson</mat-label>
+                <mat-icon matSuffix color="primary">outdoor_grill</mat-icon>
+                <input matInput type="time" formControlName="bakingTime" />
+              </mat-form-field>
+            </div>
+            <mat-form-field
+              fxFlex
+              fxFlex.lt-md="100%"
+              class="input"
+              appearance="outline"
+            >
+              <mat-label>Tags</mat-label>
+              <mat-icon matSuffix color="primary">local_offer</mat-icon>
+              <mat-chip-list #chipList aria-label="Tag selection">
+                <mat-chip
+                  *ngFor="let tag of recipe.tags"
+                  [selectable]="true"
+                  [removable]="true"
+                  (removed)="remove(tag)"
+                >
+                  {{ tag }}
+                  <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+                <input
+                  placeholder="Tags"
+                  #tagInput
+                  [formControl]="tagCtrl"
+                  [matAutocomplete]="auto"
+                  [matChipInputFor]="chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  (matChipInputTokenEnd)="add($event)"
+                />
+              </mat-chip-list>
+              <mat-autocomplete
+                #auto="matAutocomplete"
+                (optionSelected)="selected($event)"
+              >
+                <mat-option
+                  *ngFor="let tag of filteredTags | async"
+                  [value]="tag"
+                >
+                  {{ tag }}
+                </mat-option>
+              </mat-autocomplete>
+              <mat-hint
+                >Catégorisez/rangez vos recettes comme vous le
+                souhaitez</mat-hint
+              >
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="form-section">
+          <!-- INGREDIENTS -->
+          <span class="section">
+            <span class="section-title">
+              <mat-icon>kitchen</mat-icon>
+              <h3>Ingredients</h3>
+            </span>
+            <span class="section-subtitle">
+              Là où la magie opère ... Listez ici les ingrédients qui feront de
+              cette recette une réussite !
+            </span>
+          </span>
+          <div cdkDropList class="steps-list">
+            <div
+              fxLayout="row wrap"
+              fxLayoutGap="10px grid"
+              *ngFor="let ingredient of recipe.ingredients; let i = index"
+            >
+              <div
+                fxFlex="0 0 100px"
+                fxFlex.lt-sm="calc(50% - 10px - 25px)"
+                fxFlexAlign="center"
+              >
+                <mat-form-field class="input" appearance="outline">
+                  <mat-label>Quantité</mat-label>
+                  <input
+                    matInput
+                    type="number"
+                    min="0"
+                    max="99"
+                    [ngModelOptions]="{ standalone: true }"
+                    [(ngModel)]="ingredient.quantity"
+                    placeholder="1"
+                  />
+                </mat-form-field>
+              </div>
+              <div
+                fxFlex="0 0 100px"
+                fxFlex.lt-sm="calc(50% - 10px - 25px)"
+                fxFlexAlign="center"
+              >
+                <mat-form-field class="input" appearance="outline">
+                  <mat-label>Unité</mat-label>
+                  <mat-select [(value)]="ingredient.unit">
+                    <mat-option
+                      *ngFor="let unit of quantityUnits"
+                      [value]="unit.acronym"
+                    >
+                      {{ unit.acronym }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div fxFlex="0 0 50px" fxFlexAlign="center" fxHide fxShow.lt-sm>
+                <button
+                  mat-icon-button
+                  (click)="delete_ingredient(i)"
+                  alt="Delete an ingredient"
+                  type="button"
+                >
+                  <mat-icon color="warn">delete</mat-icon>
+                </button>
+              </div>
+              <div fxFlex fxFlexAlign="center">
+                <mat-form-field class="input" appearance="outline">
+                  <mat-label>Ingrédient</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    maxlength="249"
+                    [ngModelOptions]="{ standalone: true }"
+                    [(ngModel)]="ingredient.name"
+                    placeholder="Ingrédient"
+                  />
+                </mat-form-field>
+              </div>
+              <div fxFlex="0 0 50px" fxFlexAlign="center" fxShow fxHide.lt-sm>
+                <button
+                  mat-icon-button
+                  (click)="delete_ingredient(i)"
+                  alt="Delete an ingredient"
+                  type="button"
+                >
+                  <mat-icon color="warn">delete</mat-icon>
+                </button>
+              </div>
+              <div
+                fxFlex="0 0 100%"
+                fxHide
+                fxShow.lt-sm
+                style="margin-bottom: 10px"
+              >
+                <mat-divider></mat-divider>
+              </div>
+            </div>
+          </div>
+          <a
+            mat-raised-button
+            (click)="add_ingredient()"
+            style="margin-left: 46px; margin-top: 10px"
+            matTooltip="Ajouter un ingrédient"
+          >
+            <mat-icon color="primary">add_box</mat-icon>
+            Ingrédient
+          </a>
+        </div>
+        <div class="form-section">
+          <!-- STEPS -->
+          <span class="section">
+            <span class="section-title">
+              <mat-icon>list</mat-icon>
+              <h3>Étapes</h3>
+            </span>
+            <span class="section-subtitle">
+              Décrivez les étapes (dans l'ordre c'est mieux) de la recettes.
+              N'oubliez pas la pincée de l'ingrédient secret, mais si, à la fin.
+            </span>
+          </span>
+          <div
+            cdkDropList
+            class="steps-list"
+            (cdkDropListDropped)="drop_step($event)"
+          >
+            <div
+              class="move"
+              *ngFor="let step of recipe.steps; let i = index"
+              cdkDrag
+            >
+              <!-- we put a div above all otherwise display: flex is gone after a drag-drop -->
+              <div fxLayout="row" fxLayoutGap="10px">
+                <div fxFlex="0 0 32px" fxFlexAlign="center">
+                  <mat-icon cdkDragHandle color="primary" style="cursor: move"
+                    >open_with</mat-icon
+                  >
+                </div>
+                <div fxFlex>
+                  <mat-form-field class="input" appearance="outline">
+                    <mat-label>Étape {{ step.position }}</mat-label>
+                    <textarea
+                      matInput
+                      matTextareaAutosize
+                      matAutosizeMinRows="2"
+                      [ngModelOptions]="{ standalone: true }"
+                      [(ngModel)]="step.content"
+                    ></textarea>
+                  </mat-form-field>
+                </div>
+                <div fxFlex="0 0 40px" fxFlexAlign="center">
+                  <button
+                    mat-icon-button
+                    (click)="delete_step(i)"
+                    alt="Delete a step"
+                    type="button"
+                  >
+                    <mat-icon color="warn">delete</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a
+            mat-raised-button
+            (click)="add_step(recipe.steps.length)"
+            style="margin-left: 46px; margin-top: 10px"
+            matTooltip="Ajouter une étape"
+          >
+            <mat-icon color="primary">add_box</mat-icon>
+            Étape
+          </a>
+        </div>
+        <mat-divider></mat-divider>
+        <div style="margin-top: 20px; text-align: right">
+          <button
+            mat-stroked-button
+            [routerLink]="['/recipes/list']"
+            color="warn"
+            type="button"
+            *ngIf="!this.showSpin"
+          >
+            <mat-icon inline>cancel</mat-icon>
+            Annuler
+          </button>
+          &nbsp;&nbsp;
+          <button
+            mat-stroked-button
+            color="primary"
+            type="submit"
+            *ngIf="!this.showSpin"
+          >
+            <mat-icon inline>add_circle</mat-icon>
+            {{ editMode ? "Modifier" : "Ajouter" }}
+          </button>
+          <mat-spinner diameter="20" *ngIf="showSpin"></mat-spinner>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

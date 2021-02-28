@@ -1,0 +1,8 @@
+.list-container {
+    @media screen and (max-width: 1279px) {
+        width: 80% !important;
+    }
+    @media screen and (max-width: 599px) {
+        width: 85% !important;
+    }
+}

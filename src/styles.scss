@@ -2,25 +2,93 @@
 
 @import "variables.scss";
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  margin: 0;
+}
+
+.root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar {
+  flex-shrink: 0;
+}
+
+.content {
+  flex: 1 0 auto;
+}
+
+.footer {
+  flex-shrink: 0;
+}
 
 .page-title {
-    background-color: $primary-light;
-    height: 80px;
+  background-color: $primary-light;
+  height: 80px;
 
+  h1 {
+    margin: 0;
+    padding-left: 40px;
+    padding-top: 25px;
+    font-size: 26px;
+    font-weight: 100;
+    color: white;
+  }
+}
+@media screen and (max-width: 959px) {
+  .page-title {
+    height: 60px;
     h1 {
-        margin: 0;
-        padding-left: 40px;
-        padding-top: 25px;
-        font-size: 26px;
-        font-weight: 100;
-        color: white;
+      font-size: 22px;
+      padding-top: 17px;
+      padding-left: 25px;
     }
+  }
+}
+
+.outer-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .page-container {
-    width: 70%;
-    margin: auto;
-    padding-bottom: 30px;
+  z-index: 2;
+  width: 70%;
+  margin: auto;
+  padding-bottom: 30px;
+}
+
+.page-spinner {
+  z-index: 1000;
+  position: absolute;
+  top: calc(50% - 50px);
+  left: calc(50% - 50px);
+}
+
+// https://github.com/angular/components/issues/8416
+.mat-checkbox-layout {
+  white-space: normal !important;
+}
+
+.footer-container {
+  z-index: 2;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 150px;
+  background-color: $primary;
+}
+
+.grecaptcha-badge {
+  visibility: hidden;
 }

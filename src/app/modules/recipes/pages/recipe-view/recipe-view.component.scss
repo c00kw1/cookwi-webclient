@@ -1,0 +1,116 @@
+@import "../../../../../variables.scss";
+
+.view-container {
+  width: 50% !important;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  @media screen and (max-width: 1919px) {
+    width: 60% !important;
+  }
+  @media screen and (max-width: 1279px) {
+    width: 70% !important;
+  }
+  @media screen and (max-width: 959px) {
+    width: 80% !important;
+  }
+  @media screen and (max-width: 599px) {
+    width: 100% !important;
+    padding: 0;
+  }
+}
+
+.section {
+  display: block;
+  margin-bottom: 15px;
+
+  .section-title {
+    display: flex;
+    align-items: center;
+
+    mat-icon {
+      padding-right: 10px;
+    }
+  }
+
+  .section-subtitle {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+  }
+}
+
+.recipe-img-area {
+  position: relative;
+
+  .recipe-img {
+    background-color: #f3f4f6;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    max-height: 400px;
+    object-fit: cover;
+  }
+  .recipe-img-back {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+  }
+  .recipe-img-update {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    .delete-button {
+      margin-left: 10px;
+    }
+  }
+  .recipe-img-timings {
+    position: absolute;
+    width: 230px;
+    height: 36px;
+    border-radius: 20px;
+    background-color: $primary;
+    bottom: 35px;
+    left: 0px;
+    color: white;
+    .recipe-img-timings-content {
+      height: 100%;
+      padding-left: 10px;
+      padding-right: 10px;
+      span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 24px;
+        border-right: 1px solid white;
+        mat-icon {
+          margin-right: 10px;
+        }
+      }
+      span:last-child {
+        border-right: none;
+      }
+    }
+  }
+}
+
+.recipe-ingredients-list {
+  padding: 20px;
+  .recipe-ingredient-row {
+    span {
+    }
+  }
+}
+
+.recipe-steps-list {
+  padding-bottom: 20px;
+  .recipe-steps-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    background-color: $primary-verylight;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.2em;
+  }
+}

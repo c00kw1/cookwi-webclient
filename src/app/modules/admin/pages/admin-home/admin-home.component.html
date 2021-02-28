@@ -1,0 +1,30 @@
+<div class="page-title mat-elevation-z0">
+  <h1>Administration</h1>
+</div>
+
+<div class="page-container">
+  <mat-tab-group color="accent">
+    <mat-tab label="quantity-units">
+      <ng-template mat-tab-label>
+        <mat-icon style="margin-right: 10px">square_foot</mat-icon>
+        Quantity units
+      </ng-template>
+      <div class="tab-content">
+        <app-quantity-units-list></app-quantity-units-list>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Users">
+      <ng-template mat-tab-label>
+        <mat-icon style="margin-right: 10px">people_outline</mat-icon>
+        Users
+      </ng-template>
+
+      <div class="tab-content">
+        <button mat-flat-button color="accent" (click)="generateInvitation()">
+          <mat-icon>person_add_alt_1</mat-icon> Generate invitation
+        </button>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

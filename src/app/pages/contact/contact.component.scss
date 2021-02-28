@@ -1,0 +1,30 @@
+.outer-container {
+  background-image: url("../../../assets/splash/burrito.jpg");
+  height: calc(100% - 80px); // title takes place
+}
+
+.contact-container {
+  padding-top: 60px;
+  width: 30%;
+  @media screen and (max-width: 1919px) {
+    width: 40% !important;
+    padding-top: 50px;
+  }
+  @media screen and (max-width: 1279px) {
+    width: 70% !important;
+    padding-top: 40px;
+  }
+  @media screen and (max-width: 959px) {
+    width: 80% !important;
+    padding-top: 30px;
+  }
+  @media screen and (max-width: 599px) {
+    width: 90% !important;
+    padding-top: 20px;
+  }
+}
+
+.input {
+  width: 100%;
+  font-size: 15px;
+}
