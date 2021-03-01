@@ -26,7 +26,10 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { HistoryComponent } from './pages/history/history.component';
 import { MatSelectModule } from '@angular/material/select';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
+import localeFr from '@angular/common/locales/fr';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeFr);
 
 @NgModule({
   declarations: [
@@ -62,7 +65,7 @@ import { NgModule } from '@angular/core';
     MatDividerModule,
     MatSelectModule,
   ],
-  providers: [],
+  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
