@@ -1,10 +1,10 @@
 <div class="topbar">
   <mat-toolbar color="primary" class="mat-elevation-z6">
-    <!-- MOBILE BAR -->
-    <mat-toolbar-row fxShow="true" fxHide.gt-sm="true">
+    <mat-toolbar-row fxShow="true">
       <!-- LEFT MENU -->
-      <button mat-icon-button [matMenuTriggerFor]="leftMenu">
+      <button mat-button [matMenuTriggerFor]="leftMenu" style="font-size: 1em">
         <mat-icon>menu</mat-icon>
+        &nbsp;&nbsp;Menu
       </button>
       <mat-menu #leftMenu="matMenu">
         <!-- connected -->
@@ -52,6 +52,7 @@
         [matMenuTriggerFor]="rightMenu"
       >
         <mat-icon>face</mat-icon>
+        {{ user_identity }}
       </button>
       <mat-menu #rightMenu="matMenu">
         <a
@@ -69,65 +70,6 @@
         <button mat-menu-item *ngIf="isAdmin()" [routerLink]="['admin']">
           <mat-icon>admin_panel_settings</mat-icon>
           Admin
-        </button>
-        <button mat-menu-item (click)="logout()">
-          <mat-icon>power_settings_new</mat-icon>
-          Deconnexion
-        </button>
-      </mat-menu>
-    </mat-toolbar-row>
-
-    <!-- FULL SIZE BAR -->
-    <mat-toolbar-row fxShow="true" fxHide.lt-md="true">
-      <!-- TITLE -->
-      <span class="title" [routerLink]="['/home']" style="margin-right: 50px">
-        <img src="assets/logo2.png" alt="Cookwi logo" />
-        &nbsp;&nbsp;Cookwi
-      </span>
-
-      <!-- LEFT MENU -->
-      <!-- connected -->
-      <a mat-button *ngIf="isLoggedIn | async" [routerLink]="['/recipes/list']">
-        Mes recettes
-      </a>
-      <!-- not connected -->
-      <a
-        mat-button
-        *ngIf="!(isLoggedIn | async)"
-        [routerLink]="['/contact', { type: 'access' }]"
-      >
-        Demander un accès
-      </a>
-      <!-- whatever -->
-      <a mat-button [routerLink]="['/history']"> Histoire d'oeuf </a>
-      <a mat-button [routerLink]="['/contact']"> Contact </a>
-      <a mat-button color="accent" [routerLink]="['/contact', { type: 'bug' }]">
-        <mat-icon>bug_report</mat-icon>
-        J'ai un bug
-      </a>
-
-      <span class="spacer"></span>
-
-      <!-- RIGHT MENU -->
-      <button mat-icon-button *ngIf="!(isLoggedIn | async)" (click)="login()">
-        <mat-icon>login</mat-icon>
-      </button>
-      <button
-        mat-button
-        *ngIf="isLoggedIn | async"
-        [matMenuTriggerFor]="rightMenu"
-      >
-        <mat-icon>face</mat-icon>
-        {{ user_identity }}
-      </button>
-      <mat-menu #rightMenu="matMenu">
-        <button mat-menu-item [routerLink]="['/profile']">
-          <mat-icon>face</mat-icon>
-          Profil
-        </button>
-        <button mat-menu-item (click)="refresh()">
-          <mat-icon>update</mat-icon>
-          Refresh token
         </button>
         <button mat-menu-item (click)="logout()">
           <mat-icon>power_settings_new</mat-icon>

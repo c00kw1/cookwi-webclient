@@ -29,27 +29,32 @@ body {
   flex-shrink: 0;
 }
 
-.page-title {
-  background-color: $primary-light;
-  height: 80px;
+// GENERAL HELPERS
+.centered-inner {
+  width: 60% !important;
+  margin: auto;
 
-  h1 {
-    margin: 0;
-    padding-left: 40px;
-    padding-top: 25px;
-    font-size: 26px;
-    font-weight: 100;
-    color: white;
+  @media screen and (max-width: 599px) {
+    width: 100% !important;
+  }
+  @media screen and (min-width: 600px) and (max-width: 959px) {
+    width: 90% !important;
+  }
+  @media screen and (min-width: 960px) and (max-width: 1279px) {
+    width: 80% !important;
+  }
+  @media screen and (min-width: 1280px) and (max-width: 1919px) {
+    width: 70% !important;
   }
 }
-@media screen and (max-width: 959px) {
-  .page-title {
-    height: 60px;
-    h1 {
-      font-size: 22px;
-      padding-top: 17px;
-      padding-left: 25px;
-    }
+
+h1 {
+  font-size: 3em;
+  @media screen and (max-width: 959px) {
+    font-size: 1.5em;
+  }
+  @media screen and (min-width: 960px) and (max-width: 1919px) {
+    font-size: 2.5em;
   }
 }
 

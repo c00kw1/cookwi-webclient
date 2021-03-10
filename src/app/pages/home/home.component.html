@@ -1,100 +1,42 @@
-<div class="outer-container">
-  <div class="page-container home-container">
-    <div class="home-banner">
-      <mat-card
-        class="banner-text mat-elevation-z4"
-        fxLayout="row"
-        fxLayoutGap="50px"
-      >
-        <div fxFlex="17%" fxHide.lt-md>
-          <img src="assets/pages/home.png" />
-        </div>
-        <div fxFlex fxFlexAlign="center">
-          <mat-card-title>Bienvenue sur cookwi</mat-card-title>
-          <mat-card-content>
-            <p>
-              Cookwi est le livre de recettes digital, pour toute la tribu.
-              <br />
-              Du poussin tout juste sorti de la coquille, jusqu'au chef toqué !
-            </p>
-            <p>
-              Retrouvez en un clic votre recette favorite de quiche, votre
-              craquage sucré ou la pièce montée d'antan de Mamie Arlette.
-            </p>
-            <!-- NOT CONNECTED -->
-            <div
-              *ngIf="!(authService.isAuthenticated$ | async)"
-              class="card-buttons"
-              fxLayout="row wrap"
-              fxLayout.lt-sm="column"
-              fxLayoutGap="20px grid"
-              fxLayoutAlign="center"
-            >
-              <div
-                fxFlex="0 1 calc(36% - 20px)"
-                fxFlex.lt-lg="0 1 calc(50% -20px)"
-                fxFlex.lt-sm="100"
-              >
-                <button
-                  mat-stroked-button
-                  color="primary"
-                  [routerLink]="['/contact', { type: 'access' }]"
-                >
-                  <mat-icon>sentiment_satisfied_alt</mat-icon>
-                  Je veux essayer
-                </button>
-              </div>
-              <div
-                fxFlex="0 1 calc(36% - 20px)"
-                fxFlex.lt-lg="0 1 calc(50% -20px)"
-                fxFlex.lt-sm="100"
-              >
-                <button mat-flat-button color="accent" (click)="login()">
-                  <mat-icon>account_circle</mat-icon>
-                  Me connecter
-                </button>
-              </div>
-            </div>
-            <!-- CONNECTED -->
-            <div
-              *ngIf="authService.isAuthenticated$ | async"
-              class="card-buttons"
-              fxLayout="row wrap"
-              fxLayout.lt-sm="column"
-              fxLayoutGap="20px grid"
-              fxLayoutAlign="center"
-            >
-              <div
-                fxFlex="0 1 calc(36% - 20px)"
-                fxFlex.lt-lg="0 1 calc(50% -20px)"
-                fxFlex.lt-sm="100"
-              >
-                <button
-                  mat-flat-button
-                  color="accent"
-                  [routerLink]="['/recipes/list']"
-                >
-                  <mat-icon>menu_book</mat-icon>
-                  Mes recettes
-                </button>
-              </div>
-              <div
-                fxFlex="0 1 calc(36% - 20px)"
-                fxFlex.lt-lg="0 1 calc(50% -20px)"
-                fxFlex.lt-sm="100"
-              >
-                <div matTooltip="Les tribues arrivent bientôt">
-                  <!-- because tooltip on disabled button does not work ... -->
-                  <button mat-flat-button color="accent" disabled>
-                    <mat-icon>family_restroom</mat-icon>
-                    Mes tribues
-                  </button>
-                </div>
-              </div>
-            </div>
-          </mat-card-content>
-        </div>
-      </mat-card>
+<div class="page-title">
+  <div class="page-title-inner centered-inner" fxLayout="row">
+    <div class="cookwi" fxFlex="40%" fxHide.lt-lg>
+      <img src="assets/pages/home.png" />
+    </div>
+    <div class="title" fxFlex="60%" fxFlex.lt-lg="100%">
+      <h1>Bienvenue sur Cookwi</h1>
+      <div class="subtitle">
+        <p>Votre livre de recettes numérique</p>
+        <br />
+        <p>Pour toute la tribu</p>
+        <br />
+        <p>Partout, tout le temps, sur tous vos supports</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page-body">
+  <div class="centered-inner page-body-inner">
+    <div class="home-buttons" fxLayout="row wrap" fxLayoutGap="10px grid">
+      <div fxFlex="33%">
+        <button mat-flat-button class="" color="accent">
+          <mat-icon>menu_book</mat-icon>
+          &nbsp;&nbsp;Mes recettes
+        </button>
+      </div>
+      <div fxFlex="33%">
+        <button mat-flat-button class="btn-tribes">
+          <mat-icon>groups</mat-icon>
+          &nbsp;&nbsp;Mes tribus
+        </button>
+      </div>
+      <div fxFlex="33%">
+        <button mat-flat-button class="btn-profil">
+          <mat-icon>face</mat-icon>
+          &nbsp;&nbsp;Mon profil
+        </button>
+      </div>
     </div>
   </div>
 </div>
