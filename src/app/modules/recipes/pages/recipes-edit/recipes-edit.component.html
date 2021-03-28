@@ -1,14 +1,15 @@
-<div class="page-title mat-elevation-z0">
-  <h1>{{ editMode ? "Modifier" : "Créer" }} une recette</h1>
+<div class="page-title">
+  <div class="page-title-inner centered-inner">
+    <div class="title">
+      <h1>{{ editMode ? "Modifier" : "Créer" }} une recette</h1>
+    </div>
+  </div>
 </div>
+
 <div class="page-container create-container">
   <mat-card class="mat-elevation-z4">
     <div class="recipe-photo-area">
-      <img
-        class="recipe-img"
-        mat-card-image
-        [src]="image || defaultImage"
-      />
+      <img class="recipe-img" mat-card-image [src]="image || defaultImage" />
       <div class="recipe-img-upload">
         <button type="button" mat-raised-button (click)="fileInput.click()">
           <mat-icon>insert_photo</mat-icon>

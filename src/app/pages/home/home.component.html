@@ -1,4 +1,4 @@
-<div class="page-title">
+<div class="page-title-large">
   <div class="page-title-inner centered-inner" fxLayout="row">
     <div class="cookwi" fxFlex="40%" fxHide.lt-lg>
       <img src="assets/pages/home.png" />
@@ -17,26 +17,48 @@
 </div>
 
 <div class="page-body">
-  <div class="centered-inner page-body-inner">
+  <div class="centered-inner">
     <div class="home-buttons" fxLayout="row wrap" fxLayoutGap="10px grid">
-      <div fxFlex="33%">
-        <button mat-flat-button class="" color="accent">
+      <div fxFlex fxFlex.lt-md="100%">
+        <button
+          mat-flat-button
+          class=""
+          color="accent"
+          [routerLink]="['/recipes']"
+        >
           <mat-icon>menu_book</mat-icon>
           &nbsp;&nbsp;Mes recettes
         </button>
       </div>
-      <div fxFlex="33%">
+      <div fxFlex fxFlex.lt-md="100%">
         <button mat-flat-button class="btn-tribes">
           <mat-icon>groups</mat-icon>
           &nbsp;&nbsp;Mes tribus
         </button>
       </div>
-      <div fxFlex="33%">
+      <div fxFlex fxFlex.lt-md="100%">
         <button mat-flat-button class="btn-profil">
           <mat-icon>face</mat-icon>
           &nbsp;&nbsp;Mon profil
         </button>
       </div>
     </div>
+    <div class="home-text">
+      <p>
+        Cookwi, c'est un livre numérique pour tes recettes et celles de toute la
+        tribu.
+      </p>
+      <br />
+      <p>Du poussin tout juste sorti de la coquille, jusqu'au chef toqué !</p>
+      <br /><br />
+      <p>Retrouve en un clic ...</p>
+      <br />
+      <p>ta recette favorite de quiche</p>
+      <br />
+      <p>ton dernier craquage sucré</p>
+      <br />
+      <p>la pièce montée de Mamie Germaine</p>
+    </div>
+    <span class="separator"></span>
   </div>
 </div>

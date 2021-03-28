@@ -29,13 +29,121 @@ body {
   flex-shrink: 0;
 }
 
-// GENERAL HELPERS
+// BIG TITLE
+.page-title-large {
+  width: 100%;
+  height: 400px;
+  padding-top: 70px; // topbar absolute counts
+
+  @media screen and (max-width: 959px) {
+    height: 200px;
+  }
+
+  .page-title-inner {
+    height: 100%;
+    padding: 20px;
+    margin: auto;
+
+    @media screen and (max-width: 959px) {
+      width: 100% !important;
+    }
+
+    .cookwi {
+      height: 100%;
+      img {
+        display: block;
+        max-width: 100%;
+        max-height: 100%;
+        margin: auto;
+      }
+    }
+
+    .title {
+      width: 100%;
+      height: 100%;
+      text-align: right;
+      padding-top: 70px;
+      @media screen and (max-width: 959px) {
+        padding-top: 15px !important;
+      }
+      @media screen and (max-width: 599px) {
+        padding-top: 0px !important;
+      }
+      h1 {
+        display: inline-block;
+        background-color: white;
+        font-weight: 500;
+        padding-left: 80px;
+        padding-right: 15px;
+        margin: 0;
+        margin-bottom: 40px;
+      }
+      .subtitle {
+        p {
+          display: inline-block;
+          background-color: white;
+          margin: 0;
+          padding-left: 80px;
+          padding-right: 15px;
+          margin-top: 5px;
+          font-size: 1.7em;
+          font-weight: 400;
+          @media screen and (max-width: 959px) {
+            font-size: 1em;
+          }
+        }
+      }
+    }
+  }
+}
+
+// NORMAL TITLE
+.page-title {
+  width: 100%;
+  height: 150px;
+  padding-top: 70px; // topbar absolute counts
+
+  @media screen and (max-width: 959px) {
+    height: 100px;
+  }
+
+  .page-title-inner {
+    height: 100%;
+    margin: auto;
+
+    .title {
+      width: 100%;
+      height: 100%;
+      text-align: left;
+      padding-top: 45px;
+      @media screen and (max-width: 959px) {
+        padding-top: 30px !important;
+      }
+      h1 {
+        display: inline-block;
+        background-color: white;
+        font-weight: 500;
+        padding-right: 80px;
+        padding-left: 15px;
+        margin: 0;
+      }
+    }
+  }
+}
+
+// BODY
+.page-body {
+  width: 100%;
+  padding-top: 30px;
+}
+
+// GLOBAL
 .centered-inner {
   width: 60% !important;
   margin: auto;
 
   @media screen and (max-width: 599px) {
-    width: 100% !important;
+    width: 95% !important;
   }
   @media screen and (min-width: 600px) and (max-width: 959px) {
     width: 90% !important;
@@ -48,10 +156,22 @@ body {
   }
 }
 
+.separator {
+  display: block;
+  width: 200px;
+  height: 8px;
+  background-color: $accent;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
 h1 {
   font-size: 3em;
-  @media screen and (max-width: 959px) {
+  @media screen and (max-width: 599px) {
     font-size: 1.5em;
+  }
+  @media screen and (min-width: 600px) and (max-width: 959px) {
+    font-size: 2em;
   }
   @media screen and (min-width: 960px) and (max-width: 1919px) {
     font-size: 2.5em;

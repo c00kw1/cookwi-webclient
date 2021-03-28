@@ -73,5 +73,7 @@ $app-warn: mat-palette($mat-red);
 $primary: mat-color($app-primary);
 $primary-light: mat-color($app-primary, 300);
 $primary-verylight: mat-color($app-primary, 100);
+$primary-dark: mat-color($app-primary, 700);
+$primary-verydark: mat-color($app-primary, 900);
 $accent: mat-color($app-accent);
 $warn: mat-color($app-warn);

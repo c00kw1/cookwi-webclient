@@ -2,39 +2,40 @@
   <mat-toolbar color="primary" class="mat-elevation-z6">
     <mat-toolbar-row fxShow="true">
       <!-- LEFT MENU -->
-      <button mat-button [matMenuTriggerFor]="leftMenu" style="font-size: 1em">
-        <mat-icon>menu</mat-icon>
-        &nbsp;&nbsp;Menu
-      </button>
-      <mat-menu #leftMenu="matMenu">
-        <!-- connected -->
-        <button
-          mat-menu-item
-          *ngIf="isLoggedIn | async"
-          [routerLink]="['/recipes/list']"
-        >
-          <mat-icon>menu_book</mat-icon>
-          Mes recettes
+      <div class="left-menu">
+        <button mat-icon-button [matMenuTriggerFor]="leftMenu">
+          <mat-icon>menu</mat-icon>
         </button>
-        <!-- not connected -->
-        <button
-          mat-menu-item
-          *ngIf="!(isLoggedIn | async)"
-          [routerLink]="['/contact', { type: 'access' }]"
-        >
-          <mat-icon>assignment</mat-icon>
-          Demander un accès
-        </button>
-        <!-- whatever -->
-        <button mat-menu-item [routerLink]="['/history']">
-          <mat-icon>contact_support</mat-icon>
-          Histoire d'oeuf
-        </button>
-        <button mat-menu-item [routerLink]="['/contact']">
-          <mat-icon>alternate_email</mat-icon>
-          Contact
-        </button>
-      </mat-menu>
+        <mat-menu #leftMenu="matMenu">
+          <!-- connected -->
+          <button
+            mat-menu-item
+            *ngIf="isLoggedIn | async"
+            [routerLink]="['/recipes/list']"
+          >
+            <mat-icon>menu_book</mat-icon>
+            Mes recettes
+          </button>
+          <!-- not connected -->
+          <button
+            mat-menu-item
+            *ngIf="!(isLoggedIn | async)"
+            [routerLink]="['/contact', { type: 'access' }]"
+          >
+            <mat-icon>assignment</mat-icon>
+            Demander un accès
+          </button>
+          <!-- whatever -->
+          <button mat-menu-item [routerLink]="['/history']">
+            <mat-icon>contact_support</mat-icon>
+            Histoire d'oeuf
+          </button>
+          <button mat-menu-item [routerLink]="['/contact']">
+            <mat-icon>alternate_email</mat-icon>
+            Contact
+          </button>
+        </mat-menu>
+      </div>
 
       <!-- TITLE -->
       <span class="title" [routerLink]="['/home']">
@@ -43,39 +44,40 @@
       </span>
 
       <!-- RIGHT MENU -->
-      <button mat-icon-button *ngIf="!(isLoggedIn | async)" (click)="login()">
-        <mat-icon>login</mat-icon>
-      </button>
-      <button
-        mat-icon-button
-        *ngIf="isLoggedIn | async"
-        [matMenuTriggerFor]="rightMenu"
-      >
-        <mat-icon>face</mat-icon>
-        {{ user_identity }}
-      </button>
-      <mat-menu #rightMenu="matMenu">
-        <a
-          mat-menu-item
-          href="{{ environment.sso.issuer }}/account/"
-          target="_blank"
+      <div class="right-menu">
+        <button mat-icon-button *ngIf="!(isLoggedIn | async)" (click)="login()">
+          <mat-icon>login</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          *ngIf="isLoggedIn | async"
+          [matMenuTriggerFor]="rightMenu"
         >
           <mat-icon>face</mat-icon>
-          Profil
-        </a>
-        <button mat-menu-item *ngIf="isAdmin()" (click)="refresh()">
-          <mat-icon>update</mat-icon>
-          Refresh token
         </button>
-        <button mat-menu-item *ngIf="isAdmin()" [routerLink]="['admin']">
-          <mat-icon>admin_panel_settings</mat-icon>
-          Admin
-        </button>
-        <button mat-menu-item (click)="logout()">
-          <mat-icon>power_settings_new</mat-icon>
-          Deconnexion
-        </button>
-      </mat-menu>
+        <mat-menu #rightMenu="matMenu">
+          <a
+            mat-menu-item
+            href="{{ environment.sso.issuer }}/account/"
+            target="_blank"
+          >
+            <mat-icon>face</mat-icon>
+            Profil
+          </a>
+          <button mat-menu-item *ngIf="isAdmin()" (click)="refresh()">
+            <mat-icon>update</mat-icon>
+            Refresh token
+          </button>
+          <button mat-menu-item *ngIf="isAdmin()" [routerLink]="['admin']">
+            <mat-icon>admin_panel_settings</mat-icon>
+            Admin
+          </button>
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>power_settings_new</mat-icon>
+            Deconnexion
+          </button>
+        </mat-menu>
+      </div>
     </mat-toolbar-row>
   </mat-toolbar>
 </div>
